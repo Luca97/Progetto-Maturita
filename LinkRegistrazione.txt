@@ -1,0 +1,5 @@
+POSSIBILI codici sorgente per la registrazione dell'audio da un microfono:
+- http://www.c-sharpcorner.com/forums/recording-sound-using-direct-sound
+- https://www.programmersheaven.com/discussion/248000/directsound-recording-sound-from-microphone-and-playing-it
+- http://www.codeproject.com/Articles/31356/C-MP-Sound-Capturing-Recording-Componentv
+L'ultimo è quello piu' sicuro
