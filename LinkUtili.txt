@@ -1,5 +1,8 @@
-POSSIBILI codici sorgente per la registrazione dell'audio da un microfono:
+REGISTRAZIONE: (attività terminata)
 - http://www.c-sharpcorner.com/forums/recording-sound-using-direct-sound
 - https://www.programmersheaven.com/discussion/248000/directsound-recording-sound-from-microphone-and-playing-it
 - http://www.codeproject.com/Articles/31356/C-MP-Sound-Capturing-Recording-Componentv
-L'ultimo � quello piu' sicuro
+L'ultimo è quello piu' sicuro
+
+LINK midimountain.com per tabella ID -> nota
+http://www.midimountain.com/midi/midi_note_numbers.html
