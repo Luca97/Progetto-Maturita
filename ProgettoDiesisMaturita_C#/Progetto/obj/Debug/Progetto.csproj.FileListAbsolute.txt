@@ -1,0 +1,40 @@
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\bin\Debug\Progetto.exe.config
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\bin\Debug\Progetto.exe
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\bin\Debug\Progetto.pdb
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.csprojResolveAssemblyReference.cache
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.Benvenuto.resources
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.Properties.Resources.resources
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.csproj.GenerateResource.Cache
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.exe
+c:\users\luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.pdb
+C:\Users\Luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.Accesso.resources
+C:\Users\Luca\documents\visual studio 2012\Projects\Progetto\Progetto\obj\Debug\Progetto.Registrazione.resources
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\bin\Debug\Progetto.exe.config
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.exe
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.pdb
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\bin\Debug\Progetto.exe
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\bin\Debug\Progetto.pdb
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.csprojResolveAssemblyReference.cache
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.Accesso.resources
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.Benvenuto.resources
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.Properties.Resources.resources
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.Recupero.resources
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.Registrazione.resources
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.csproj.GenerateResource.Cache
+\\jms2012.jeanmonnet.local\INFAppData$\beggio_luca\Downloads\Progetto\Progetto\obj\Debug\Progetto.Programma.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\bin\Debug\Progetto.exe.config
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.exe
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.pdb
+C:\Users\Andrea\Desktop\Progetto\Progetto\bin\Debug\Progetto.exe
+C:\Users\Andrea\Desktop\Progetto\Progetto\bin\Debug\Progetto.pdb
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.csprojResolveAssemblyReference.cache
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Accesso.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Benvenuto.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Properties.Resources.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Recupero.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.csproj.GenerateResource.Cache
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Menu.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.ModificaDati.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Recorder.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.RegistrazioneUtente.resources
+C:\Users\Andrea\Desktop\Progetto\Progetto\obj\Debug\Progetto.Visualizza.resources

@@ -1,0 +1,10 @@
+<backup>
+        <duration>24</duration>
+      </backup>
+      <note>
+        <rest measure="yes"/>
+        <duration>24</duration>
+        <voice>2</voice>
+        <staff>2</staff>
+      </note>
+    </measure>
