@@ -9,6 +9,9 @@ $password = $_REQUEST["pass"];
 $email = $_REQUEST["email"];
 $psw = md5($password); //in $psw c'è ora la password criptata.
 
+session_start();
+$_SESSION["username"] = $username;
+
 $servername = "localhost";
 $user = "root";
 $password = "";

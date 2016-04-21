@@ -1,7 +1,10 @@
 <?php
+
 $username = $_REQUEST["nome"];
 $password = $_REQUEST["pass"];
 $psw = md5($password); //in $psw c'è ora la password criptata.
+session_start();
+$_SESSION["username"] = $username;
 
 define('DB_HOST', 'localhost'); 
 define('DB_NAME', 'diesis'); 
@@ -33,8 +36,8 @@ session_start();
 	} 
 	else 
 	{ 
-		$error="Username or Password is invalid"; 
-		header("location: error.html");
+		//$error="Username or Password is invalid"; 
+		header("location: index.php");
 	} 
 //And now in body part of this page we have to include the html login form...
 

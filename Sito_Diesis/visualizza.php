@@ -2,19 +2,18 @@
 	<head>
 		<script type="text/javascript" src="chkLogin.js"></script>
 		<link href="style.css" rel="stylesheet">
-		<title>login</title>
+		<title>Visualizza</title>
 	</head>
 	<?php
 	session_start();
 	include "dbClass.php";
 	$db= new dbClass;
 	$select=array("Username","Email","Password");
-	$query="SELECT Username,Email FROM Users WHERE Username='".$_SESSION["username"]."' ORDER BY Username";
+	$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' ORDER BY Titolo";
 	$ar=array();
 	$ar=$db->interroga($query);
 	$db->closeConnection();
-	$ar=$ar[0];
-	$ar=explode(";",$ar);
+	//$ar=explode(";",$ar);
 	?>
 	<body>
 		<div id="immagine">
