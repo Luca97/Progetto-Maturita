@@ -165,32 +165,38 @@ namespace Progetto
             {
                 tipo = "whole";
                 listaNote[i].intDurata = 4.0f;
+                listaNote[i].duration = 256;
             }
            else if (durataNota > durataQuarto && durataNota < durataMezzo)//se sta tra 1/4 e 1/2 allora è 1/2
             {
                     tipo = "half";
                     listaNote[i].intDurata = 2.0f;
-            }
+                    listaNote[i].duration = 128;
+                }
             else if (durataNota > durataOttavo && durataNota < durataQuarto)
             {
                     tipo = "quarter";
                     listaNote[i].intDurata = 1.0f;
-            }
+                    listaNote[i].duration = 64;
+                }
            else if (durataNota > durataSedicesimo && durataNota < durataOttavo)
             {
                 tipo = "eighth";
                 listaNote[i].intDurata = 0.5f;
-            }
+                listaNote[i].duration = 32;
+                }
            else if (durataNota > durataTrentaduesimo && durataNota < durataSedicesimo)
             {
                     tipo = "16th";
                     listaNote[i].intDurata = 0.25f;
-            }
+                    listaNote[i].duration = 32;
+                }
             else if (durataNota < durataTrentaduesimo)//se è piu piccola di 1/32 è 1/32 .
             {
                 tipo = "32th";
                 listaNote[i].intDurata = 0.125f;
-            }
+                    listaNote[i].duration = 16;
+                }
 
             listaNote[i].durata = tipo;//Assegno alla nota la sua durata!
 
@@ -202,16 +208,16 @@ namespace Progetto
             //riempio il vettore che mi servirà successivamente:
             string[] vettoreIdNote = new string[12];
             vettoreIdNote[0] = "C";
-            vettoreIdNote[1] = "C#";
+            vettoreIdNote[1] = "C";//
             vettoreIdNote[2] = "D";
-            vettoreIdNote[3] = "D#";
+            vettoreIdNote[3] = "D";//
             vettoreIdNote[4] = "E";
             vettoreIdNote[5] = "F";
-            vettoreIdNote[6] = "F#";
+            vettoreIdNote[6] = "F";//
             vettoreIdNote[7] = "G";
-            vettoreIdNote[8] = "G#";
+            vettoreIdNote[8] = "G";//
             vettoreIdNote[9] = "A";
-            vettoreIdNote[10] = "A#";
+            vettoreIdNote[10] = "A";//
             vettoreIdNote[11] = "B";
 
             //RIEMPIO LA MATRICE TABELLA:
@@ -256,7 +262,7 @@ namespace Progetto
             //riempio la stringa xml di ogni nota.
             for (int i = 0; i < listaNote.Count; i++)
                 listaNote[i].xmlString =
- "<note>\n <pitch> \n <step>" + listaNote[i].nomeNota + "</step>\n  <octave>"+ listaNote[i].numOttava+"</octave>\n  </pitch>\n <duration>12</duration>\n  <voice>1</voice>\n  <type>" + listaNote[i].durata + "</type>\n </note>";
+ "<note>\n <pitch> \n <step>" + listaNote[i].nomeNota + "</step>\n  <octave>"+ listaNote[i].numOttava+"</octave>\n  </pitch>\n <duration>"+listaNote[i].duration+"</duration>\n  <voice>1</voice>\n  <type>" + listaNote[i].durata + "</type>\n </note>";
         }  
 
        private void parsing()
@@ -299,7 +305,7 @@ namespace Progetto
 
                 
                 float battiti = 0f;
-                while (battiti < 4)
+                while (battiti < 4 && indexNote<5)
                 {
                     //aggiungo la nota solo se la sua durata sommata a battiti non supera il 4.
                     //if(...)
@@ -330,10 +336,11 @@ namespace Progetto
       public  float ID, start, end;
         public string nomeNota, durata, numOttava;//vengono assegnati dopo aver fatto le operazioni.
         public float intDurata;
+        public int duration;
 
         public string xmlString;
 
-        public Nota() { nomeNota = ""; durata = ""; numOttava = ""; intDurata = 0.0f; xmlString = ""; }
+        public Nota() { nomeNota = ""; durata = ""; numOttava = ""; intDurata = 0.0f; xmlString = ""; duration = 0; }
         public Nota(float ID, float start, float end)
         {
             this.ID = ID;
@@ -341,6 +348,7 @@ namespace Progetto
             this.end = end;
             nomeNota = ""; durata = ""; numOttava = ""; intDurata = 0.0f;
             xmlString = "";
+            duration = 0;
         }
 
     }

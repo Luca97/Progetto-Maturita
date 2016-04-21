@@ -97,7 +97,7 @@
         <measure-numbering>none</measure-numbering>
       </print>
       <attributes>
-        <divisions>6</divisions>
+        <divisions>256</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -118,155 +118,32 @@
       </attributes>
       <sound tempo="120"/>
 <note>
-<pitch>
-<step>
-F#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-half
-</type>
-</note>
-
+ <pitch> 
+ <step>F</step>
+  <octave>5</octave>
+  </pitch>
+ <duration>128</duration>
+  <voice>1</voice>
+  <type>half</type>
+ </note>
 <note>
-<pitch>
-<step>
-C#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
+ <pitch> 
+ <step>C</step>
+  <octave>5</octave>
+  </pitch>
+ <duration>64</duration>
+  <voice>1</voice>
+  <type>quarter</type>
+ </note>
 <note>
-<pitch>
-<step>
-D</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
-<backup>
-        <duration>24</duration>
-      </backup>
-      <note>
-        <rest measure="yes"/>
-        <duration>24</duration>
-        <voice>2</voice>
-        <staff>2</staff>
-</note>
-    </measure> 
-	<measure number="2" width="581">
-      <print>
-        <system-layout>
-          <system-margins>
-            <left-margin>70</left-margin>
-            <right-margin>0</right-margin>
-          </system-margins>
-          <top-system-distance>211</top-system-distance>
-        </system-layout>
-        <measure-numbering>none</measure-numbering>
-      </print>
-      <attributes>
-        <divisions>6</divisions>
-        <key>
-          <fifths>0</fifths>
-          <mode>major</mode>
-        </key>
-        <time>
-          <beats>4</beats>
-          <beat-type>4</beat-type>
-        </time>
-        <staves>2</staves>
-        <clef number="1">
-          <sign>G</sign>
-          <line>2</line>
-        </clef>
-        <clef number="2">
-          <sign>F</sign>
-          <line>4</line>
-        </clef>
-      </attributes>
-      <sound tempo="120"/>
-<note>
-<pitch>
-<step>
-F#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-half
-</type>
-</note>
-
-<note>
-<pitch>
-<step>
-C#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
-<note>
-<pitch>
-<step>
-D</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
+ <pitch> 
+ <step>D</step>
+  <octave>5</octave>
+  </pitch>
+ <duration>64</duration>
+  <voice>1</voice>
+  <type>quarter</type>
+ </note>
 <backup>
         <duration>24</duration>
       </backup>
@@ -276,8 +153,7 @@ quarter
         <voice>2</voice>
         <staff>2</staff>
       </note>
-    </measure> 
-	<measure number="3" width="581">
+    </measure> <measure number="1" width="581">
       <print>
         <system-layout>
           <system-margins>
@@ -289,7 +165,7 @@ quarter
         <measure-numbering>none</measure-numbering>
       </print>
       <attributes>
-        <divisions>6</divisions>
+        <divisions>256</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -310,59 +186,23 @@ quarter
       </attributes>
       <sound tempo="120"/>
 <note>
-<pitch>
-<step>
-F#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-half
-</type>
-</note>
-
+ <pitch> 
+ <step>D</step>
+  <octave>5</octave>
+  </pitch>
+ <duration>64</duration>
+  <voice>1</voice>
+  <type>quarter</type>
+ </note>
 <note>
-<pitch>
-<step>
-C#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
-<note>
-<pitch>
-<step>
-D</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
+ <pitch> 
+ <step>E</step>
+  <octave>5</octave>
+  </pitch>
+ <duration>256</duration>
+  <voice>1</voice>
+  <type>whole</type>
+ </note>
 <backup>
         <duration>24</duration>
       </backup>
@@ -372,7 +212,7 @@ quarter
         <voice>2</voice>
         <staff>2</staff>
       </note>
-    </measure> <measure number="4" width="581">
+    </measure> <measure number="1" width="581">
       <print>
         <system-layout>
           <system-margins>
@@ -384,7 +224,7 @@ quarter
         <measure-numbering>none</measure-numbering>
       </print>
       <attributes>
-        <divisions>6</divisions>
+        <divisions>256</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
@@ -404,60 +244,47 @@ quarter
         </clef>
       </attributes>
       <sound tempo="120"/>
-<note>
-<pitch>
-<step>
-F#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-half
-</type>
-</note>
-
-<note>
-<pitch>
-<step>
-C#</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
-<note>
-<pitch>
-<step>
-D</step>
-<octave>5
-</octave>
-</pitch>
-<duration>
-12
-</duration>
-<voice>
-1
-</voice>
-<type>
-quarter
-</type>
-</note>
-
+<backup>
+        <duration>24</duration>
+      </backup>
+      <note>
+        <rest measure="yes"/>
+        <duration>24</duration>
+        <voice>2</voice>
+        <staff>2</staff>
+      </note>
+    </measure> <measure number="1" width="581">
+      <print>
+        <system-layout>
+          <system-margins>
+            <left-margin>70</left-margin>
+            <right-margin>0</right-margin>
+          </system-margins>
+          <top-system-distance>211</top-system-distance>
+        </system-layout>
+        <measure-numbering>none</measure-numbering>
+      </print>
+      <attributes>
+        <divisions>256</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+        </key>
+        <time>
+          <beats>4</beats>
+          <beat-type>4</beat-type>
+        </time>
+        <staves>2</staves>
+        <clef number="1">
+          <sign>G</sign>
+          <line>2</line>
+        </clef>
+        <clef number="2">
+          <sign>F</sign>
+          <line>4</line>
+        </clef>
+      </attributes>
+      <sound tempo="120"/>
 <backup>
         <duration>24</duration>
       </backup>

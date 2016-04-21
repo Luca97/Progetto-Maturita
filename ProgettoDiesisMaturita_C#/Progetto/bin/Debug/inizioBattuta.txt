@@ -10,7 +10,7 @@
         <measure-numbering>none</measure-numbering>
       </print>
       <attributes>
-        <divisions>6</divisions>
+        <divisions>256</divisions>
         <key>
           <fifths>0</fifths>
           <mode>major</mode>
