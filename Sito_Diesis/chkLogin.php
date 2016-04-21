@@ -32,7 +32,7 @@ session_start();
 	if($count==1) 
 	{ 
 		//$_SESSION['login_user']=$username; 
-		header("location: sezioni.html"); 
+		header("location: manageCr.php"); 
 	} 
 	else 
 	{ 
@@ -43,49 +43,4 @@ session_start();
 
 
 $conn->close();
-
-
-/* // file leggifile.php
-$nomefile ="utentiRegistrati.csv";
-if (file_exists($nomefile))
-{ 
-  $idfile=fopen($nomefile,"r");      
-  if (!$idfile) die ($msg="il file &nomefile non è stato aperto<br>");   
-  $msg="apertura file $nomefile <br/>";
-  echo $idfile;
-}
-else
-  $msg="il file $nomefile  non esiste <br>";
-echo $msg;
-
-		
-		
-		
-$auth = false;
-
- $file = explode( "\n", file_get_contents( $nomefile ));
-foreach( $file as $line ) {
-//echo $line;
-    list($usernameFile, $passwordFile) = explode(";", $line);
-	$pswTrim= trim($passwordFile);  //tolgo lo spazio in fondo alla riga -.-
-	echo $usernameFile . "-" . $pswTrim."<br/>";
-	//echo $username . "-" . $psw;
-    if ($username == $usernameFile && $psw==$pswTrim) {
-        $auth = true;
-		
-        break; // use this to stop iterating over $file and end the foreach-loop
-    }
-}
-
-if($auth) {
-    header('Location: sezioni.html');
-} else {
-   header('Location: Login.php');
-}
-
-
-fclose($idfile); */
-
-
-
 ?>
