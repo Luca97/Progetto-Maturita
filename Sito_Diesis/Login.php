@@ -74,7 +74,7 @@
 	<form class="form" action="chkLogin.php" method="POST">
 			<input type="text" name="nome" id="nome" placeholder="username"/><br/></br>
 			<input type="password" name="pass" id="pass" placeholder="password"/><br/><br/>
-			<input class="button" type="submit" value="Login" onclick="return chkLogin();"/>
+			<button>Login</button>
 			<br/>Non sei ancora iscritto? <a href="Registrazione.php">Registrati!</a>
 	</form>
 	
