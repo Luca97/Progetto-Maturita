@@ -13,6 +13,7 @@
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/styleIndex.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -44,7 +45,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Diesis#</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,9 +58,6 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
-					<li>
-						<a href="#">Lanzi Gay</a>
-					</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -72,12 +69,11 @@
     <div class="container">
 	
 	<div id="immagine">
-			<img src="logo.png" style="width:200;">
+			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
 	<form class="form" action="chkLogin.php" method="POST">
-			<h2>LOGIN</h2>
-			Nome <input type="text" name="nome" id="nome"/><br/></br>
-			Password <input type="password" name="pass" id="pass"/><br/><br/>
+			<input type="text" name="nome" id="nome" placeholder="username"/><br/></br>
+			<input type="password" name="pass" id="pass" placeholder="password"/><br/><br/>
 			<input class="button" type="submit" value="Login" onclick="return chkLogin();"/>
 			<br/>Non sei ancora iscritto? <a href="Registrazione.php">Registrati!</a>
 	</form>
