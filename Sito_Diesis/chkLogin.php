@@ -17,9 +17,9 @@ $conn = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 if ($conn->connect_error) 
 {
     die("Connection failed: " . $conn->connect_error);
-} 
+}
 
-session_start(); 
+session_start();
 
  // username and password received from loginform 
 	$username=mysqli_real_escape_string($conn,$username); 
