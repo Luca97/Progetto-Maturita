@@ -13,6 +13,7 @@
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/styleIndex.css" rel="stylesheet">
 	
 	<!--<link href="style.css" rel="stylesheet">-->
 	<script type="text/javascript" src="chkRegistra.js"></script>
@@ -53,6 +54,21 @@
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+               
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+	
+	<!-- Navigation -->
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display 
+            <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -61,7 +77,7 @@
                 </button>
                 <a class="navbar-brand" href="index.php">Diesis#</a>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and other content for toggling
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -78,24 +94,23 @@
 					</li>
                 </ul>
             </div>
-            <!-- /.navbar-collapse -->
+            <!-- /.navbar-collapse
         </div>
-        <!-- /.container -->
-    </nav>
+        <!-- /.container
+    </nav>-->
 
     <!-- Page Content -->
     <div class="container">
 	
 	<div id="immagine">
-			<img src="logo.png" style="width:200;">
+			<img src="logo.png" style="width: 350px;height: 200px;">
 		</div>
 		<form class="form" action="chkRegistra.php" method="POST">
-			<h2>REGISTRAZIONE</h2>
-			Username <input type="text" name="nome" id="nome"/><br/></br>
-			Email <input type="text" name="email" id="email"/><br/><br/>
-			Password <input type="password" name="pass" id="pass"/><br/><br/>
-			Conferma Password <input type="password" name="confPass" id="confPass"/><br/><br/>
-			<input class="button" type="submit" value="Registrati" onclick="return chkRegistra();"/>
+			<input type="text" name="nome" id="nome" placeholder="username"/><br/></br>
+			<input type="text" name="email" id="email" placeholder="email"/><br/><br/>
+			<input type="password" name="pass" id="pass" placeholder="password"/><br/><br/>
+			<input type="password" name="confPass" id="confPass" placeholder="Conferma password"/><br/><br/>
+			<button>Registrati</button>
 			<br/>Sei gia' iscritto? <a href="login.php">Login!</a>
 		</form>
 	
