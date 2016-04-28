@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
-    <title>Login</title>
+    <title>Registrazione</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,6 @@
 	<!-- Custom CSS -->
     <style>
     body {
-        padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
     </style>
@@ -49,20 +48,6 @@
 	?>
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-               
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 	
 	<!-- Navigation -->
     <!--<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -106,7 +91,7 @@
 			<img src="logo.png" style="width: 350px;height: 200px;">
 		</div>
 		<form class="form" action="chkRegistra.php" method="POST">
-			<input type="text" name="nome" id="nome" placeholder="username"/><br/></br>
+			<input type="text" name="username" id="username" placeholder="username"/><br/></br>
 			<input type="text" name="email" id="email" placeholder="email"/><br/><br/>
 			<input type="password" name="pass" id="pass" placeholder="password"/><br/><br/>
 			<input type="password" name="confPass" id="confPass" placeholder="Conferma password"/><br/><br/>
