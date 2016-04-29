@@ -63,7 +63,7 @@ namespace Server
             
             else // se la chiave non risponde
             {
-                return "tentativo di accesso fraudolento";
+                return "nokey";
             }
 
             return "nulla";//se non trova nulla
@@ -106,7 +106,7 @@ namespace Server
                             cmd.Parameters.AddWithValue("@usn", username);
                             cmd.Parameters.AddWithValue("@psw", nuovapassword);
                             cmd.Parameters.AddWithValue("@eml", eml);
-                            cmd.CommandText = "UPDATE Users(Username, Password, Email) VALUES (@usn, @psw, eml) WHERE Username='" + username + "' AND Email='" + eml + "'";
+                            cmd.CommandText = "UPDATE Users(Username, Password, Email) VALUES (@usn, @psw, @eml) WHERE Username='" + username + "' AND Email='" + eml + "'";
 
                             //modulo per mandare all'utente la nuova password
                             SmtpClient smtpClient = new SmtpClient();
@@ -152,7 +152,7 @@ namespace Server
             }
             else
             {
-                return "tentativo di accesso fraudolento";
+                return "nokey";
             }
 
             return "nulla";
@@ -166,8 +166,76 @@ namespace Server
 
             if (key.Equals("Unaacaso1997-"))
             {
-                //inserimento nuovo utente in sql 
+                string connStr = "server=localhost;user=root;database=rubrica;port=3306;password=;";
+                bool valido = true;
 
+                MySqlDataReader rdr = null;
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    conn.Open();
+
+                    // string sql = "INSERT INTO `contatti` (`ID`, `Nome`, `email`, `Tel`) VALUES (NULL, 'xxx', 'xxx', 'xxx');";
+                    string sql = "SELECT * FROM `users` WHERE username='" + usn + "'";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    //script.Error += new MySqlScriptErrorEventHandler(script_Error);
+                    //script.ScriptCompleted += new EventHandler(script_ScriptCompleted);
+                    //script.StatementExecuted += new MySqlStatementExecutedEventHandler(script_StatementExecuted);
+
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        if (rdr.GetString(0).Equals(usn))
+                        {
+                            valido = false;
+                            return "nousn";
+                        }
+
+                        if (rdr.GetString(2).Equals(eml))
+                        {
+                            valido = false;
+                            return "noeml";
+                        }
+
+                    }
+
+                    if (valido == true)
+                    {
+                        cmd.Parameters.AddWithValue("@usn", usn);
+                        cmd.Parameters.AddWithValue("@psw", psw);
+                        cmd.Parameters.AddWithValue("@eml", eml);
+                        sql = "INSERT INTO `users` (`Username`, `Password`, `Email`) VALUES (@usn, @psw, @eml)";
+
+                        //modulo per mandare all'utente la nuova password
+                        SmtpClient smtpClient = new SmtpClient();
+                        NetworkCredential basicCredential = new NetworkCredential("noreply.diesis@gmail.com", "06021997Lucaf6-");
+                        MailMessage message = new MailMessage();
+                        MailAddress fromAddress = new MailAddress("noreply.diesis@gmail.com");
+
+                        smtpClient.Host = "smtp.gmail.com";
+                        smtpClient.UseDefaultCredentials = false;
+                        smtpClient.Credentials = basicCredential;
+                        smtpClient.Port = 587;
+                        smtpClient.EnableSsl = true;
+
+                        message.From = fromAddress;
+                        message.Subject = "Cambio della password";
+                        //Set IsBodyHtml to true means you can send HTML email.
+                        message.IsBodyHtml = true;
+                        message.Body = "Grazie per esserti iscritto;\n Il tuo username è: @usn\n La tua password è: @psw (criptata)\n ";
+                        message.To.Add(eml);
+                        message.Priority = MailPriority.High;
+
+                    }
+
+
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+                }
                 return "ok";
             }
             else
