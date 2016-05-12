@@ -1,6 +1,8 @@
 <?php
-	$db = "diesis";
-	$connessione = mysqli_connect("localhost","root","",$db);
+	
+	include "dbClass.php";
+	$dbC= new dbClass;
+	$connessione = $dbC->getCon();
 	
 	if(!$connessione)
 	{

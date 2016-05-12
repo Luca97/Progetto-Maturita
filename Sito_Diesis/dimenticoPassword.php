@@ -44,7 +44,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Diesis#</a>
+                <a class="navbar-brand" href="#">Diesis#</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -61,6 +61,9 @@
 					<li>
 						<a href="cambiaEmail.php">Cambia email</a>
 					</li>
+					<li>
+						<a href="logout.php">Logout</a>
+					</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -72,7 +75,7 @@
     <div class="container">
 	
 	<div id="immagine">
-			<img src="logo.png" style="width:200;">
+			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
 	<form id="form1" name="form1" method="post" action="check_dimenticoPassword.php">
 			Username :

@@ -34,18 +34,6 @@
     <![endif]-->
 
 </head>
-<?php
-	session_start();
-	include "dbClass.php";
-	$db= new dbClass;
-	$select=array("Username","Email","Password");
-	$query="SELECT Username,Email FROM Users WHERE Username='".$_SESSION["username"]."' ORDER BY Username";
-	$ar=array();
-	$ar=$db->interroga($query);
-	$db->closeConnection();
-	$ar=$ar[0];
-	$ar=explode(";",$ar);
-	?>
 <body>
 
 	
@@ -93,7 +81,7 @@
 		<form class="form" action="chkRegistra.php" method="POST">
 			<input type="text" name="username" id="username" placeholder="username"/><br/></br>
 			<input type="text" name="email" id="email" placeholder="email"/><br/><br/>
-			<input type="password" name="pass" id="pass" placeholder="password"/><br/><br/>
+			<input type="password" name="password" id="password" placeholder="password"/><br/><br/>
 			<input type="password" name="confPass" id="confPass" placeholder="Conferma password"/><br/><br/>
 			<button>Registrati</button>
 			<br/>Sei gia' iscritto? <a href="login.php">Login!</a>

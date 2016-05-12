@@ -33,13 +33,13 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-</head>
 <?php
 	session_start();
 	include "dbClass.php";
+	$username=$_SESSION["username"];
 	$db= new dbClass;
 	$select=array("Username","Email","Password");
-	$query="SELECT Username,Email FROM Users WHERE Username='".$_SESSION["username"]."' ORDER BY Username";
+	$query="SELECT Username,Email FROM Users WHERE Username='".$username."' ORDER BY Username";
 	$ar=array();
 	$ar=$db->interroga($query);
 	$db->closeConnection();
@@ -59,7 +59,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">Diesis#</a>
+                <a class="navbar-brand" href="#">Diesis#</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -83,10 +83,7 @@
 						<a href="visualizza.php">Files XML</a>
 					</li>
 					<li>
-						<a href="social.php">Social</a>
-					</li>
-					<li>
-						<a href="login.php">Logout</a>
+						<a href="logout.php">Logout</a>
 					</li>
                 </ul>
             </div>
@@ -98,9 +95,9 @@
     <!-- Page Content -->
     <div class="container">
 	
-	<!--<div id="immagine">
-			<img src="logo.png" style="width:200;">
-		</div>-->
+	<div id="immagine">
+			<!--<img src="logo.png" style="width:200;">-->
+		</div>
 		<form class="form" action="sezioni.html" method="POST">
 			<h2>Area utente</h2>
 			<table border="1" style="width:100%">

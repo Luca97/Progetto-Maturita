@@ -11,7 +11,7 @@ class dbClass {
 	public function openConnection()
 	{
 		
-		$this->con=mysqli_connect("localhost","root","","diesis");//Setto la connessione col db in modo tale che lavori sul db diesis
+		$this->con=mysqli_connect("localhost","root","","diesis");//Setto la connessione col db in modo tale che lavori sul db 5a_Morisco_DBcinema
 	   // Check connection
 		if (mysqli_connect_errno())
 		  {
@@ -20,6 +20,10 @@ class dbClass {
 	
 	}
 	
+	public function getCon()
+	{
+		return $this->con;
+	}
 	public function closeConnection()
 	{
 		
@@ -55,7 +59,57 @@ class dbClass {
 			$errore= "Failed to connect to MySQL: ";
 	}
 	
+	public function chkLogin($username,$psw)
+	{
+		if ($this->con->connect_error) 
+		{
+			die("Connection failed: " . $this->con->connect_error);
+		} 
 
+
+
+		 // username and password received from loginform 
+			$username=mysqli_real_escape_string($this->con,$username); 
+			$password=mysqli_real_escape_string($this->con,$psw); 
+			$sql_query="SELECT * FROM users WHERE username='$username' and password='$psw'"; 
+			$result=mysqli_query($this->con,$sql_query); 
+			$row=mysqli_fetch_array($result,MYSQLI_ASSOC); 
+			$count=mysqli_num_rows($result);// If result matched $username and $password, table row must be 1 row 
+			
+			if($count==1) 
+			{ 
+				//$_SESSION['login_user']=$username; 
+				header("location: manageCr.php"); 
+			} 
+			else 
+			{ 
+				//$error="Username or Password is invalid"; 
+				header("location: index.php");
+			} 
+		//And now in body part of this page we have to include the html login form...
+
+
+		
+	
+	}
+	
+	function chkRegistra($username,$psw,$email)
+	{
+		if ($this->con->connect_error) {
+			die("Connection failed: " . $this->con->connect_error);
+		} 
+
+		$sql = "INSERT INTO users (Username, Password, Email)
+		VALUES ( '$username', '$psw', '$email' )";
+
+		if ($this->con->query($sql) === TRUE) {
+			echo header("location: login.php"); 
+		} else {
+			echo "Error: " . $sql . "<br>" . $this->con->error;
+		}
+
+		$this->con->close();
+	}
 	
 }
 ?>

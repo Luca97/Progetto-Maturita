@@ -1,5 +1,5 @@
 <?php
-	$db = "diesis";
+	$db = "cinema";
 	$connessione = mysqli_connect("localhost","root","",$db);
 	
 	if(!$connessione)
