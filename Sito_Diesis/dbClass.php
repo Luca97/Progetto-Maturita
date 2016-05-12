@@ -111,5 +111,143 @@ class dbClass {
 		$this->con->close();
 	}
 	
+	function check_cambiaEmail($UsernameRequest,$Password,$newEmail)
+	{
+			
+			$sql="select email, Password
+				  from users
+				  where Username='$UsernameRequest'";
+			
+			$Result=mysqli_query($this->con,$sql);
+			$Dati= mysqli_fetch_object($Result);
+			
+			if($Dati->Password!=$Password)
+			{
+				header("Location:cambiaEmail.php");
+				//con il ritorno dell'errore nel form, ancora non so come si fa :|
+				break;
+			}
+			else if(!$Password || !$newEmail)
+			{
+				header("Location:cambiaEmail.php");
+				//stessa cosa di sopra
+				break;
+			}
+			
+			else if($Dati->Password==$Password)
+			{		
+				$sql="UPDATE users
+					SET Email = '$newEmail'
+						WHERE Username = '$UsernameRequest'
+					";
+						
+				mysqli_query($this->con, $sql);
+				
+					if ($this->con->query($sql) === TRUE) {
+						echo "Record updated successfully";
+					} else {
+						echo "Error updating record: " . $this->con->error;
+			
+		}
+	header("Location:index.php");
+	}
+	
+	}
+	
+	function check_cambiaPassword($newPassword,$UsernameRequest,$oldPassword,$secondNewPassword)
+	{
+		$sql="select Password
+			  from users
+			  where Username='$UsernameRequest'";
+		
+		$Result=mysqli_query($this->con,$sql);
+		$Dati= mysqli_fetch_object($Result);
+		
+		if($Dati->Password!=$oldPassword)
+		{
+			header("Location:index.php");
+			//con il ritorno dell'errore nel form, ancora non so come si fa :|
+			break;
+		}
+		
+		if($newPassword!=$secondNewPassword)
+		{
+			header("Location:index.php");
+			//stessa cosa di sopra
+			break;
+		}
+		else if(!$oldPassword)
+		{
+			header("Location:index.php");
+			//stessa cosa di sopra
+			break;
+		}
+		
+		else if($Dati->Password==$oldPassword)
+		{		
+			$sql="UPDATE users
+				SET Password = '$newPassword'
+					WHERE Username = '$UsernameRequest'
+				";
+					
+			mysqli_query($this->con, $sql);
+			
+				if ($this->con->query($sql) === TRUE) 
+				{
+					echo "Record updated successfully";
+				} 
+				else 
+				{
+					echo "Error updating record: " . $this->con->error;
+				}
+			$this->con->close();
+	}
+	header("Location:index.php");
+	}
+	
+	function check_dimenticoPassword($UsernameRequest,$email)
+	{
+		$sql="select Email
+			from users
+			WHERE Username = '$UsernameRequest'
+			";
+		$connessione=$this->con;	
+	$Result=mysqli_query($connessione,$sql);
+	$Dati= mysqli_fetch_object($Result);
+		
+		if($Dati->Email!=$email)
+		{
+			header("Location:index.php");
+			//con il ritorno dell'errore nel form, ancora non so come si fa :|
+			break;
+		}
+	
+	if(isset($_POST['Submit']))
+	{		
+		$newPassword = "newPassword";
+		$md5Password = md5($newPassword);
+		$oggettoMail = "Password Diesis";
+		$testoMail = "La sua password è stata modificata, la sua nuova password è $newPassword";
+				
+		$sql="UPDATE users
+			SET Password = '$md5Password'
+			WHERE Username = '$UsernameRequest'
+			";
+					
+		mysqli_query($connessione, $sql);
+			
+		if ($connessione->query($sql) === TRUE) 
+		{
+			echo "Record updated successfully";
+		} 
+		else 
+		{
+			echo "Error updating record: " . $connessione->error;
+		}
+		
+		email($email,$oggettoMail, $testoMail);
+		
+		header("Location:dimenticoPassword.php");
+	}
 }
 ?>
