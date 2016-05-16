@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
-    <title>Login</title>
+    <title>Password dimenticata</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +56,7 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="contact.php">Contatti</a>
                     </li>
 					<li>
 						<a href="cambiaEmail.php">Cambia email</a>

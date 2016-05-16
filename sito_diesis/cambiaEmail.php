@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
-    <title>Login</title>
+    <title>Cambia e-mail</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,11 +56,8 @@
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="contact.php">Contact</a>
                     </li>
-					<li>
-						<a href="cambiaPassword.php">Cambia password</a>
-					</li>
 					<li>
 						<a href="manageCr.php">Area utente</a>
 					</li>

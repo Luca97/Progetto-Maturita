@@ -9,13 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
+    <title>Utenti</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	
 	<script type="text/javascript" src="chkLogin.js"></script>
 	<!--<link href="style.css" rel="stylesheet">-->
-	<title>Miei file XML</title>
     
 	<!-- Custom CSS -->
     <style>
@@ -38,23 +38,27 @@
 	session_start();
 	include "dbClass.php";
 	$db= new dbClass;
-	$select=array("Username","Email","Password");
-
-	if(isset($_POST["genere"]))
-	{
-		$genere=$_POST["genere"];
-		
-		if(strtolower($genere)=="*" || strtolower($genere)=="tutti" || strtolower($genere)=="all")			
-			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE ORDER BY Titolo";
-		else
-			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE AND '".$genere."'ORDER BY Titolo";
-	}
-	else
-		$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE ORDER BY Titolo";
+	//$select=array("Username","Email","Password");
 	
+	if(isset($_POST["utente"]))
+	{
+		$utente=$_POST["utente"];
+		
+		if(strtolower($utente)=="*" || strtolower($utente)=="tutti" || strtolower($utente)=="all")			
+			$query="SELECT Username FROM Users";		
+		else
+			$query="SELECT Username FROM Users WHERE Username='$utente'";
+	}
+	else 	
+		$query="SELECT Username FROM Users";
+		
 	$ar=array();
 	$ar=$db->interroga($query);
 	$db->closeConnection();
+	
+	
+	
+	
 	?>
 <body>
 
@@ -84,7 +88,7 @@
                         <a href="contact.php">Contatti</a>
                     </li>
 					<li>
-						<a href="elencoUtenti.php">Elenco utenti/Cerca utente</a>
+						<a href="visualizza.php">Miei XML</a>
 					</li>
 					<li>
 						<a href="biblioteca.php">Biblioteca XML</a>
@@ -108,35 +112,27 @@
 	<div id="immagine">
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
-		<form class="form" action="visualizza.php" method="POST">
-			<h2>File Xml</h2>
-			Genere <input type="text" name="genere" id="genere" required /><br/></br>
+		<form class="form" action="elencoUtenti.php" method="POST">
+			<h2>Elenco utenti</h2>
+			Nome utente: <input type="text" name="utente" id="utente" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
 			<table border="1" style="width:100%">
 			<tr>
-				<th colspan="4">Files</th>
+				<th colspan="2">Files</th>
 			</tr>
 			<tr><!-- riga -->
-				<th>Titolo</th><!-- colonna -->
-				<th>Genere</th><!-- colonna -->
-				<th>Data creazione</th><!-- colonna -->	
-				<th>Link</th><!-- colonna -->	
+				<th>Username</th>
+				<th>Profilo</th><!-- colonna -->	
 			 </tr><!-- fine riga -->
 			<?php 
-			for($i=0;$i<sizeof($ar);$i++)//Eseguo un cicloo fro in cui stampo ogni file nella tabella
+			for($i=0;$i<sizeof($ar);$i++)//Eseguo un cicloo for in cui stampo ogni utente nella tabella
 			{
-				$riga=explode(";",$ar[$i]);//ogni elemento di ar è un file convertito in stringa, ad ogni ";"
+				//$riga=explode(";",$ar[$i]);//ogni elemento di ar è un file convertito in stringa, ad ogni ";"
 				//corrisponde un attributo del file
-				echo "<tr><!-- riga -->";
-						for($j=0;$j<sizeof($riga);$j++)//Stampo tutti gli elementi del file
-						{
-							if($j==3)
-								echo "<th><a href=".$riga[$j].">".$riga[$j]."</a></th>";//se i==3 è il link
-							else
-								echo "<th>".$riga[$j]."</th>";
-						}	
-				echo " </tr><!-- fine riga -->";
-			
+				echo "<tr><!-- riga -->
+					  <th>$ar[$i]</th>
+					  <th><a href='profiloUtente.php?utente=$ar[$i]'> Profilo di $ar[$i]</a></th>
+					  </tr><!-- fine riga -->";			
 			}
 			
 			?>

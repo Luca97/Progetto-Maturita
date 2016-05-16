@@ -9,14 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
+    <title>Profilo: <?php echo $_GET["utente"] ?></title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	
 	<script type="text/javascript" src="chkLogin.js"></script>
-	<!--<link href="style.css" rel="stylesheet">-->
-	<title>Miei file XML</title>
-    
+	<!--<link href="style.css" rel="stylesheet">-->  
 	<!-- Custom CSS -->
     <style>
     body {
@@ -38,19 +37,28 @@
 	session_start();
 	include "dbClass.php";
 	$db= new dbClass;
-	$select=array("Username","Email","Password");
-
+	//$select=array("Username","Email","Password");
+	$utente=$_GET["utente"];
+	
+	$queryUt="SELECT Username, Email FROM users WHERE Username='$utente'";
+	$arUt=array();
+	$arUt=$db->interroga($queryUt);
+	//$db->closeConnection();
+	$arUt=$arUt[0];
+	$arUt=explode(";",$arUt);
+		
 	if(isset($_POST["genere"]))
 	{
 		$genere=$_POST["genere"];
 		
 		if(strtolower($genere)=="*" || strtolower($genere)=="tutti" || strtolower($genere)=="all")			
-			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE ORDER BY Titolo";
+			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='$utente' AND Pubblico=TRUE ORDER BY Titolo";
 		else
-			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE AND '".$genere."'ORDER BY Titolo";
+			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='$utente' AND Pubblico=TRUE AND Genere='".$genere."'ORDER BY Titolo";
 	}
 	else
-		$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE ORDER BY Titolo";
+		$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='$utente' AND Pubblico=TRUE ORDER BY Titolo";
+
 	
 	$ar=array();
 	$ar=$db->interroga($query);
@@ -84,7 +92,7 @@
                         <a href="contact.php">Contatti</a>
                     </li>
 					<li>
-						<a href="elencoUtenti.php">Elenco utenti/Cerca utente</a>
+						<a href="visualizza.php">Miei XML</a>
 					</li>
 					<li>
 						<a href="biblioteca.php">Biblioteca XML</a>
@@ -108,13 +116,27 @@
 	<div id="immagine">
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
-		<form class="form" action="visualizza.php" method="POST">
+		<form class="form" action="profiloUtente.php?utente=<?php echo $utente?>" method="POST">
+			<h1>Info utente:</h1>
+			<table border="1" style="width:100%">
+			<tr><!-- riga -->
+				<th>Username:</th><!-- colonna -->
+				<td><?php echo $arUt[0]; ?></td><!-- colonna -->					
+			 </tr><!-- fine riga -->			  
+			<tr><!-- riga -->
+				<th>Email:</th><!-- colonna -->
+				<td><?php echo $arUt[1]; ?></td><!-- colonna -->					
+			 </tr><!-- fine riga -->
+			</table>
+			</form>
+			
+			<form class="form" action="profiloUtente.php?utente=<?php echo $utente?>" method="POST">			
 			<h2>File Xml</h2>
 			Genere <input type="text" name="genere" id="genere" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
 			<table border="1" style="width:100%">
 			<tr>
-				<th colspan="4">Files</th>
+				<th colspan="5">Files</th>
 			</tr>
 			<tr><!-- riga -->
 				<th>Titolo</th><!-- colonna -->

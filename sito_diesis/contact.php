@@ -9,10 +9,11 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
-    <title>Cambia password</title>
+    <title>Contatti</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/styleIndex.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <style>
@@ -32,9 +33,8 @@
 </head>
 
 <body>
-
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
@@ -44,26 +44,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Diesis#</a>
+                <a class="navbar-brand">Diesis#</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
+                <ul class="nav navbar-nav">                    
                     <li>
                         <a href="#">Home</a>
                     </li>
-                    <li>
-                        <a href="contact.php">Contact</a>
+					 <li>
+                        <a href="login.php">Login</a>
                     </li>
-					<li>
-						<a href="manageCr.php">Area utente</a>
-					</li>
-					<li>
-						<a href="logout.php">Logout</a>
-					</li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -77,16 +68,8 @@
 	<div id="immagine">
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
-	<form id="form1" name="form1" method="post" action="check_cambiaPassword.php">
-			Username :
-			<input name="Username" type="text" id="Username"/>
-			Password Corrente:
-			<input name="oldPassword" type="password" id="oldPassword"/>
-			Nuova Password :
-			<input name="newPassword" type="password" id="newPassword"/>
-			Inserire Nuovamente la Nuova Password :
-			<input name="newPasswordRepeat" type="password" id="newPasswordRepeat"/>
-			<input type="submit" name="Submit" value="Submit"/>
+	<form class="contact" action="chkLogin.php" method="POST">
+			<h1><font color="#5ED6FD">Contatti: noreply.diesis@gmail.com</font></h1>
 	</form>
 	
        <!-- <div class="row">

@@ -9,14 +9,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
-    <title>Login</title>
+    <title>Area utente</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 	
 	<script type="text/javascript" src="chkLogin.js"></script>
 	<!--<link href="style.css" rel="stylesheet">-->
-	<title>Area utente</title>
     
 	<!-- Custom CSS -->
     <style>
@@ -38,7 +37,7 @@
 	include "dbClass.php";
 	$username=$_SESSION["username"];
 	$db= new dbClass;
-	$select=array("Username","Email","Password");
+	//$select=array("Username","Email","Password");
 	$query="SELECT Username,Email FROM Users WHERE Username='".$username."' ORDER BY Username";
 	$ar=array();
 	$ar=$db->interroga($query);
@@ -65,25 +64,19 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
                         <a href="#">Home</a>
                     </li>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="contact.php">Contatti</a>
                     </li>
-					<li>
-						<a href="cambiaPassword.php">Cambia password</a>
-					</li>
-					<li>
-						<a href="cambiaEmail.php">Cambia email</a>
-					</li>
 					<li>
 						<a href="visualizza.php">Miei XML</a>
 					</li>
 					<li>
-						<a href="filePubblici.php">XML pubblici</a>
+						<a href="elencoUtenti.php">Elenco utenti/Cerca utente</a>
+					</li>
+					<li>
+						<a href="biblioteca.php">Biblioteca XML</a>
 					</li>
 					<li>
 						<a href="logout.php">Logout</a>
@@ -113,6 +106,18 @@
 				<td><?php echo $ar[1]; ?></td><!-- colonna -->					
 			 </tr><!-- fine riga -->
 			</table>
+		</form>
+		
+		<form class="form" action="cambiaPassword.html" method="POST">
+			<h2>Password</h2>
+			<h3>Desideri aggiornarla?</h3>
+			<button>Clicca qui!</button>
+		</form>
+		
+		<form class="form" action="cambiaEmail.html" method="POST">
+			<h2>Email</h2>
+			<h3>Desideri cambiarla?</h3>
+			<button>Clicca qui!</button>
 		</form>
 	
        <!-- <div class="row">

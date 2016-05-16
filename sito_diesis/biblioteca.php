@@ -15,7 +15,7 @@
 	
 	<script type="text/javascript" src="chkLogin.js"></script>
 	<!--<link href="style.css" rel="stylesheet">-->
-	<title>Miei file XML</title>
+	<title>Biblioteca</title>
     
 	<!-- Custom CSS -->
     <style>
@@ -39,18 +39,22 @@
 	include "dbClass.php";
 	$db= new dbClass;
 	$select=array("Username","Email","Password");
-
+	
+	
+	
+		
 	if(isset($_POST["genere"]))
 	{
 		$genere=$_POST["genere"];
 		
 		if(strtolower($genere)=="*" || strtolower($genere)=="tutti" || strtolower($genere)=="all")			
-			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE ORDER BY Titolo";
+			$query="SELECT Username,Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE ORDER BY Titolo";
 		else
-			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE AND '".$genere."'ORDER BY Titolo";
+			$query="SELECT Username,Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE AND '".$genere."'ORDER BY Titolo";
 	}
 	else
-		$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Username='".$_SESSION["username"]."' AND Pubblico=TRUE ORDER BY Titolo";
+		$query="SELECT Username,Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE ORDER BY Titolo";
+
 	
 	$ar=array();
 	$ar=$db->interroga($query);
@@ -84,10 +88,10 @@
                         <a href="contact.php">Contatti</a>
                     </li>
 					<li>
-						<a href="elencoUtenti.php">Elenco utenti/Cerca utente</a>
+						<a href="visualizza.php">Miei XML</a>
 					</li>
 					<li>
-						<a href="biblioteca.php">Biblioteca XML</a>
+						<a href="elencoUtenti.php">Elenco utenti/Cerca utente</a>
 					</li>
 					<li>
 						<a href="manageCr.php">Area Utente</a>
@@ -108,15 +112,16 @@
 	<div id="immagine">
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
-		<form class="form" action="visualizza.php" method="POST">
+		<form class="form" action="filePubblici.php" method="POST">
 			<h2>File Xml</h2>
 			Genere <input type="text" name="genere" id="genere" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
 			<table border="1" style="width:100%">
 			<tr>
-				<th colspan="4">Files</th>
+				<th colspan="5">Files</th>
 			</tr>
 			<tr><!-- riga -->
+				<th>Username</th>
 				<th>Titolo</th><!-- colonna -->
 				<th>Genere</th><!-- colonna -->
 				<th>Data creazione</th><!-- colonna -->	
