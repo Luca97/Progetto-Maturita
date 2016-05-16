@@ -94,27 +94,34 @@
 	<div id="immagine">
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
-		<form class="form" action="sezioni.html" method="POST">
+		<form class="form" method="POST">
 			<h2>Area utente</h2>
-			<table border="1" style="width:100%">
+			
+			<div class="datagrid">
+			<table border="1" style="width:100%">			
+			<thead>
+				<tr><!-- riga -->
+					<th>Username</th>
+					<th>Email</th><!-- colonna -->	
+				</tr><!-- fine riga -->
+			</thead>
+			<tbody>
 			<tr><!-- riga -->
-				<th>Username:</th><!-- colonna -->
-				<td><?php echo $ar[0]; ?></td><!-- colonna -->					
-			 </tr><!-- fine riga -->			  
-			<tr><!-- riga -->
-				<th>Email:</th><!-- colonna -->
-				<td><?php echo $ar[1]; ?></td><!-- colonna -->					
-			 </tr><!-- fine riga -->
+					<td><?php echo $ar[0]; ?></td>
+					<td><?php echo $ar[1]; ?></td>
+			</tr><!-- fine riga -->
+			</tbody>
 			</table>
+			</div>
 		</form>
 		
-		<form class="form" action="cambiaPassword.html" method="POST">
+		<form class="form" action="cambiaPassword.php" method="POST">
 			<h2>Password</h2>
 			<h3>Desideri aggiornarla?</h3>
 			<button>Clicca qui!</button>
 		</form>
 		
-		<form class="form" action="cambiaEmail.html" method="POST">
+		<form class="form" action="cambiaEmail.php" method="POST">
 			<h2>Email</h2>
 			<h3>Desideri cambiarla?</h3>
 			<button>Clicca qui!</button>

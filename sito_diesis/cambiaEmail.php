@@ -77,12 +77,12 @@
 	<div id="immagine">
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
-	<form id="form1" name="form1" method="post" action="check_cambiaEmail.php">
-			Username :
+	<form class="form" method="post" action="check_cambiaEmail.php">
+			<h2>Username:</h2>
 			<input name="Username" type="text" id="Username"/>
-			Password Corrente:
+			<h2>Password corrente:</h2>
 			<input name="Password" type="password" id="Password"/>
-			Nuova Email :
+			<h2>Nuova email:</h2>
 			<input name="newEmail" type="mail" id="newEmail"/>
 			<input type="submit" name="Submit" value="Submit"/>
 	</form>

@@ -113,30 +113,53 @@
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
 		<form class="form" action="elencoUtenti.php" method="POST">
-			<h2>Elenco utenti</h2>
-			Nome utente: <input type="text" name="utente" id="utente" required /><br/></br>
+			<h1>Elenco utenti</h1>
+			<h2>Nome utente:</h2> <input type="text" name="utente" id="utente" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
+			
+			<div class="datagrid">
 			<table border="1" style="width:100%">
-			<tr>
-				<th colspan="2">Files</th>
-			</tr>
-			<tr><!-- riga -->
-				<th>Username</th>
-				<th>Profilo</th><!-- colonna -->	
-			 </tr><!-- fine riga -->
+			
+			<thead>
+				<tr><!-- riga -->
+					<th>Username</th>
+					<th>Profilo</th><!-- colonna -->	
+				</tr><!-- fine riga -->
+			</thead>
+			<tbody>
 			<?php 
+			$var=1;//Variabili booleane utili alla gestione dei colori delle righe della tabella
+			$var2=0;
 			for($i=0;$i<sizeof($ar);$i++)//Eseguo un cicloo for in cui stampo ogni utente nella tabella
 			{
 				//$riga=explode(";",$ar[$i]);//ogni elemento di ar è un file convertito in stringa, ad ogni ";"
 				//corrisponde un attributo del file
-				echo "<tr><!-- riga -->
-					  <th>$ar[$i]</th>
-					  <th><a href='profiloUtente.php?utente=$ar[$i]'> Profilo di $ar[$i]</a></th>
-					  </tr><!-- fine riga -->";			
+				if($var==1)//Se var==1, la riga sarà bianca altrimenti azzurrina
+					echo "<tr><!-- riga -->
+						  <td>$ar[$i]</td>
+						  <td><a href='profiloUtente.php?utente=$ar[$i]'> Profilo di $ar[$i]</a></td>
+						  </tr><!-- fine riga -->";	
+				else 
+					echo "<tr class='alt'><!-- riga -->
+						  <td>$ar[$i]</td>
+						  <td><a href='profiloUtente.php?utente=$ar[$i]'> Profilo di $ar[$i]</a></td>
+						  </tr><!-- fine riga -->";	
+				if($var2==0)
+				{
+					$var=0;
+					$var2=1;
+				}
+				else
+				{
+					$var=1;
+					$var2=0;
+				}
 			}
 			
 			?>
+			</tbody>
 			</table>
+			</div>
 		</form>
 	
        <!-- <div class="row">

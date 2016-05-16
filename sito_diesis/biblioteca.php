@@ -48,12 +48,12 @@
 		$genere=$_POST["genere"];
 		
 		if(strtolower($genere)=="*" || strtolower($genere)=="tutti" || strtolower($genere)=="all")			
-			$query="SELECT Username,Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE ORDER BY Titolo";
+			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE ORDER BY Titolo";
 		else
-			$query="SELECT Username,Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE AND '".$genere."'ORDER BY Titolo";
+			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE AND Genere='$genere'ORDER BY Titolo";
 	}
 	else
-		$query="SELECT Username,Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE ORDER BY Titolo";
+		$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=TRUE ORDER BY Titolo";
 
 	
 	$ar=array();
@@ -112,40 +112,60 @@
 	<div id="immagine">
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
-		<form class="form" action="filePubblici.php" method="POST">
-			<h2>File Xml</h2>
-			Genere <input type="text" name="genere" id="genere" required /><br/></br>
+		<form class="form" action="biblioteca.php" method="POST">
+			<h1>Biblioteca XML</h1>
+			<h2>Genere</h2> <input type="text" name="genere" id="genere" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
-			<table border="1" style="width:100%">
-			<tr>
-				<th colspan="5">Files</th>
-			</tr>
-			<tr><!-- riga -->
-				<th>Username</th>
-				<th>Titolo</th><!-- colonna -->
-				<th>Genere</th><!-- colonna -->
-				<th>Data creazione</th><!-- colonna -->	
-				<th>Link</th><!-- colonna -->	
-			 </tr><!-- fine riga -->
-			<?php 
-			for($i=0;$i<sizeof($ar);$i++)//Eseguo un cicloo fro in cui stampo ogni file nella tabella
-			{
-				$riga=explode(";",$ar[$i]);//ogni elemento di ar è un file convertito in stringa, ad ogni ";"
-				//corrisponde un attributo del file
-				echo "<tr><!-- riga -->";
-						for($j=0;$j<sizeof($riga);$j++)//Stampo tutti gli elementi del file
-						{
-							if($j==3)
-								echo "<th><a href=".$riga[$j].">".$riga[$j]."</a></th>";//se i==3 è il link
-							else
-								echo "<th>".$riga[$j]."</th>";
-						}	
-				echo " </tr><!-- fine riga -->";
 			
-			}
-			
-			?>
-			</table>
+			<div class="datagrid">
+				<table border="1" style="width:100%">
+				<thead>
+				<tr><!-- riga -->
+					<th>Username</th>
+					<th>Titolo</th><!-- colonna -->
+					<th>Genere</th><!-- colonna -->
+					<th>Data creazione</th><!-- colonna -->	
+					<th>Link</th><!-- colonna -->	
+				</tr><!-- fine riga -->
+				</thead>
+				<tbody>
+				<?php 
+				$var=1;
+				$var2=0;
+				for($i=0;$i<sizeof($ar);$i++)//Eseguo un cicloo fro in cui stampo ogni file nella tabella
+				{
+					
+						
+					$riga=explode(";",$ar[$i]);//ogni elemento di ar è un file convertito in stringa, ad ogni ";"
+					//corrisponde un attributo del file
+					if($var==1)
+						echo "<tr><!-- riga -->";
+					else
+						echo "<tr class='alt'><!-- riga -->";
+							for($j=0;$j<sizeof($riga);$j++)//Stampo tutti gli elementi del file
+							{
+								if($j==4)
+									echo "<td><a href=".$riga[$j].">".$riga[$j]."</a></td>";//se i==3 è il link
+								else
+									echo "<td>".$riga[$j]."</td>";
+							}	
+					echo " </tr><!-- fine riga -->";
+					if($var2==0)
+					{
+						$var=0;
+						$var2=1;
+					}
+					else
+					{
+						$var=1;
+						$var2=0;
+					}
+				}
+				
+				?>
+				</tbody>
+				</table>
+			</div>
 		</form>
 	
        <!-- <div class="row">

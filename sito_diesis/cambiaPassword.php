@@ -77,14 +77,14 @@
 	<div id="immagine">
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
-	<form id="form1" name="form1" method="post" action="check_cambiaPassword.php">
-			Username :
+	<form class="form" method="post" action="check_cambiaPassword.php">
+			<h2>Username:</h2>
 			<input name="Username" type="text" id="Username"/>
-			Password Corrente:
+			<h2>Password corrente:</h2>
 			<input name="oldPassword" type="password" id="oldPassword"/>
-			Nuova Password :
+			<h2>Nuova password:</h2>
 			<input name="newPassword" type="password" id="newPassword"/>
-			Inserire Nuovamente la Nuova Password :
+			<h2>Inserire nuovamente la nuova password:</h2>
 			<input name="newPasswordRepeat" type="password" id="newPasswordRepeat"/>
 			<input type="submit" name="Submit" value="Submit"/>
 	</form>

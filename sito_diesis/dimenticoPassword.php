@@ -77,7 +77,7 @@
 	<div id="immagine">
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
-	<form id="form1" name="form1" method="post" action="check_dimenticoPassword.php">
+	<form id="form" name="form1" method="post" action="check_dimenticoPassword.php">
 			Username :
 			<input name="Username" type="text" id="Username"/>
 			Email:

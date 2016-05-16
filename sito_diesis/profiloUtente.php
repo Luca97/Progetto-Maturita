@@ -118,51 +118,74 @@
 		</div>
 		<form class="form" action="profiloUtente.php?utente=<?php echo $utente?>" method="POST">
 			<h1>Info utente:</h1>
-			<table border="1" style="width:100%">
+			<div class="datagrid">
+			<table border="1" style="width:100%">			
+			<thead>
+				<tr><!-- riga -->
+					<th>Username</th>
+					<th>Email</th><!-- colonna -->	
+				</tr><!-- fine riga -->
+			</thead>
+			<tbody>
 			<tr><!-- riga -->
-				<th>Username:</th><!-- colonna -->
-				<td><?php echo $arUt[0]; ?></td><!-- colonna -->					
-			 </tr><!-- fine riga -->			  
-			<tr><!-- riga -->
-				<th>Email:</th><!-- colonna -->
-				<td><?php echo $arUt[1]; ?></td><!-- colonna -->					
-			 </tr><!-- fine riga -->
+					<td><?php echo $arUt[0]; ?></td>
+					<td><?php echo $arUt[1]; ?></td>
+			</tr><!-- fine riga -->
+			</tbody>
 			</table>
+			</div>
 			</form>
 			
 			<form class="form" action="profiloUtente.php?utente=<?php echo $utente?>" method="POST">			
 			<h2>File Xml</h2>
 			Genere <input type="text" name="genere" id="genere" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
+			<div class="datagrid">
 			<table border="1" style="width:100%">
-			<tr>
-				<th colspan="5">Files</th>
-			</tr>
+			<thead>
 			<tr><!-- riga -->
-				<th>Titolo</th><!-- colonna -->
-				<th>Genere</th><!-- colonna -->
-				<th>Data creazione</th><!-- colonna -->	
-				<th>Link</th><!-- colonna -->	
+				<th scope="col">Titolo</th><!-- colonna -->
+				<th scope="col">Genere</th><!-- colonna -->
+				<th scope="col">Data creazione</th><!-- colonna -->	
+				<th scope="col">Link</th><!-- colonna -->	
 			 </tr><!-- fine riga -->
+			</thead>
+			<tbody>
 			<?php 
+			$var=1;
+			$var2=0;
 			for($i=0;$i<sizeof($ar);$i++)//Eseguo un cicloo fro in cui stampo ogni file nella tabella
 			{
 				$riga=explode(";",$ar[$i]);//ogni elemento di ar è un file convertito in stringa, ad ogni ";"
 				//corrisponde un attributo del file
-				echo "<tr><!-- riga -->";
+				if($var==1)
+					echo "<tr><!-- riga -->";
+				else
+					echo "<tr class='alt'><!-- riga -->";
 						for($j=0;$j<sizeof($riga);$j++)//Stampo tutti gli elementi del file
 						{
 							if($j==3)
-								echo "<th><a href=".$riga[$j].">".$riga[$j]."</a></th>";//se i==3 è il link
+								echo "<td><a href=".$riga[$j].">".$riga[$j]."</a></td>";//se i==3 è il link
 							else
-								echo "<th>".$riga[$j]."</th>";
+								echo "<td>".$riga[$j]."</td>";
 						}	
 				echo " </tr><!-- fine riga -->";
-			
+				if($var2==0)
+				{
+					$var=0;
+					$var2=1;
+				}
+				else
+				{
+					$var=1;
+					$var2=0;
+				}
 			}
 			
 			?>
+			</tbody>
 			</table>
+			</div>
 		</form>
 	
        <!-- <div class="row">
