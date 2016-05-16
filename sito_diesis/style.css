@@ -1,0 +1,37 @@
+body
+{
+	background: url('http://images.macrumors.com/article/2011/01/15/181432-OM2j.Wood%20Tile@2x.png');
+	font-size: 10pt;
+}
+
+.form
+{
+	border-color: #FF6600;
+	border-radius:10px;
+	border-style: solid;
+	border-width: 7px;
+	text-align: center;
+	width:30%;
+	position: absolute;
+	top:30%;
+	left:35%;
+}
+
+.button
+{
+	color: #F00;
+}
+
+#scelte
+{
+	position:fixed;
+	left:37%;
+}
+
+#button1, #button2, #button3
+{
+	width:300;
+	height:200;
+	float:left;
+	margin:20px;
+}
