@@ -121,7 +121,6 @@
 				<table border="1" style="width:100%">
 				<thead>
 				<tr><!-- riga -->
-					<th>Username</th>
 					<th>Titolo</th><!-- colonna -->
 					<th>Genere</th><!-- colonna -->
 					<th>Data creazione</th><!-- colonna -->	
