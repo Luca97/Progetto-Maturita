@@ -141,8 +141,8 @@
 			</form>
 			
 			<form class="form" action="profiloUtente.php?utente=<?php echo $utente?>" method="POST">			
-			<h2>File Xml</h2>
-			Genere <input type="text" name="genere" id="genere" required /><br/></br>
+			<h1>File Xml</h1>
+			<h2>Genere</h2> <input type="text" name="genere" id="genere" required /><br/></br>
 			<input class="button" type="submit" value="Filtra"/>
 			<div class="datagrid">
 			<table border="1" style="width:100%">
