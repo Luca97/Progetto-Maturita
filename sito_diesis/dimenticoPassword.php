@@ -30,7 +30,11 @@
     <![endif]-->
 
 </head>
-
+<?php 
+	
+	if(!isset($_SESSION["username"]))//Se non sei autenticato, non puoi accedere a questa pagine e vieni reindirizzato alla pagina di login
+		echo header("location: login.php");
+?>
 <body>
 
     <!-- Navigation -->

@@ -31,7 +31,11 @@
     <![endif]-->
 
 </head>
-
+<?php 
+	
+	if(!isset($_SESSION["username"]))//Se non sei autenticato, non puoi accedere a questa pagine e vieni reindirizzato alla pagina di login
+		echo header("location: login.php");
+?>
 <body background="https://images.alphacoders.com/453/45373.jpg" ><!--align="center" background-repeat="no-repeat" attachment="fixed"--> 
     <!-- Navigation -->
 	 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
