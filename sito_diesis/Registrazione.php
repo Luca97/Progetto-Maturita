@@ -73,10 +73,15 @@
 			<img src="logo.png" style="width: 350px;height: 200px;">
 		</div>
 		<form class="form" action="chkRegistra.php" method="POST">
-			<input type="text" name="username" id="username" placeholder="username"/><br/></br>
-			<input type="text" name="email" id="email" placeholder="email"/><br/><br/>
-			<input type="password" name="password" id="password" placeholder="password"/><br/><br/>
-			<input type="password" name="confPass" id="confPass" placeholder="Conferma password"/><br/><br/>
+			<h3>Username ed email accettati</h3>
+			<!--<input type="text" name="username" id="username" placeholder="username" <?php if(isset($_GET["username"])) {
+																$username=$_GET['username'];																
+																echo "value=$username";}?>><br/></br>
+			<input type="text" name="email" id="email" placeholder="email" <?php if(isset($_GET["email"])){
+																$email=$_GET['email'];
+																echo "value=$email";}?>><br/><br/>-->
+			<!--<h4>Inserire password:</h4>--><input type="password" name="password" id="password" placeholder="Scegli una password"/><br/><br/>
+			<!--<h4>Conferma password:</h4>--><input type="password" name="confPass" id="confPass" placeholder="Conferma password"/><br/><br/>
 			<button>Registrati</button>
 			<br/>Sei gia' iscritto? <a href="login.php">Login!</a>
 		</form>

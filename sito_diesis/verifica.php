@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<script type="text/javascript" src="chkLogin.js"></script>
-    <title>Login</title>
+    <title>Verifica disponibilità</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -68,11 +68,23 @@
 	<div id="immagine">
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
-	<form class="form" action="chkLogin.php" method="POST">
+	<form class="form" action="chkVerifica.php" method="POST">
+			<?php if(isset($_GET["errore"])){
+					if($_GET["errore"]==1)
+						echo "<font>Username non disponibile.</font>";
+					else if($_GET["errore"]==2)
+						echo "<font>Email già registrata!</font></br></br>
+							 <font>Se sei già registrato, <a href='recuperoCredenziali.php'>recupera le tue credenziali!</a></font>";
+					else if($_GET["errore"]==3)
+						echo "<font>Username ed email non disponibili.</font>";
+					
+					}
+			?>
+			<h3>Verifica disponibilità</h3>
 			<input type="text" name="username" id="username" placeholder="username"/><br/></br>
-			<input type="password" name="password" id="password" placeholder="password"/><br/><br/>
-			<button>Login</button>
-			<br/>Non sei ancora iscritto? <a href="verifica.php">Registrati!</a>
+			<input type="text" name="email" id="email" placeholder="example@example.com"/><br/><br/>
+			<button>Verifica</button>
+			<br/>Sei già iscritto? <a href="login.php">Effettua il login!</a>
 	</form>
 	
        <!-- <div class="row">

@@ -93,6 +93,48 @@ class dbClass {
 	
 	}
 	
+	public function chkVerifica($username,$email)
+	{
+		if ($this->con->connect_error) 
+		{
+			die("Connection failed: " . $this->con->connect_error);
+		} 
+
+
+
+		 // username and email received from loginform 
+			$username=mysqli_real_escape_string($this->con,$username); 
+			$email=mysqli_real_escape_string($this->con,$email); 
+			$sql_query="SELECT * FROM users WHERE username='$username' or email='$email'"; 
+			$result=mysqli_query($this->con,$sql_query); 
+			$obj=mysqli_fetch_object($result); 
+			$count=mysqli_num_rows($result);// If result matched $username and $email, table row must be 1 row 
+			
+			if($count>0) 
+			{ 
+				//$_SESSION['login_user']=$username; 
+				if($obj->Username==$username && $obj->Email==$email)
+					header("location: verifica.php?errore=3"); 
+				else if($obj->Username==$username && $obj->Email!=$email)
+					header("location: verifica.php?errore=1"); 
+				else if($obj->Username!=$username && $obj->Email==$email)
+					header("location: verifica.php?errore=2"); 
+			} 
+			else 
+			{ 
+				//$error="Username or Password is invalid"; 
+				session_start();
+				$_SESSION["newUser"]=$username;
+				$_SESSION["newMail"]=$email;
+				header("location: registrazione.php");
+			} 
+		//And now in body part of this page we have to include the html login form...
+
+
+		
+	
+	}
+	
 	function chkRegistra($username,$psw,$email)
 	{
 		if ($this->con->connect_error) {
