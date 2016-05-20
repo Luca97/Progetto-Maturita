@@ -3,3 +3,7 @@ C:\Users\Luca\Downloads\Server\Server\bin\Server.dll
 C:\Users\Luca\Downloads\Server\Server\bin\Server.pdb
 C:\Users\Luca\Downloads\Server\Server\obj\Debug\Server.dll
 C:\Users\Luca\Downloads\Server\Server\obj\Debug\Server.pdb
+C:\Users\Luca\Desktop\Progetto\Server\Server\bin\Server.dll
+C:\Users\Luca\Desktop\Progetto\Server\Server\bin\Server.pdb
+C:\Users\Luca\Desktop\Progetto\Server\Server\obj\Debug\Server.dll
+C:\Users\Luca\Desktop\Progetto\Server\Server\obj\Debug\Server.pdb

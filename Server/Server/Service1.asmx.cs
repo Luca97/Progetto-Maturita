@@ -34,7 +34,7 @@ namespace Server
 
                 string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;"; //stringa che definisce i parametri di connessione
                 MySqlDataReader rdr = null; //definisce il lettore di tipo MySsql 
-                
+
                 try //prova a lavorare sul DB
                 {
                     MySqlConnection conn = new MySqlConnection(connStr);//crea una connessione con i parametri della stringa
@@ -46,7 +46,7 @@ namespace Server
                     rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
                     while (rdr.Read())//fin quando riesce a leggere qualcosa
                     {
-                        if (rdr.GetString(0).Equals(usn) && rdr.GetString(1).Equals(psw))//se usn e psw ricevuti sono uguali a quella dell'istanza 
+                        if (rdr.GetString(0).Equals(usn) && rdr.GetString(1).Equals(MD5GenerateHash(psw)))//se usn e psw ricevuti sono uguali a quella dell'istanza 
                         {
                             return "ok";// allora ritorna ok
                         }
@@ -56,18 +56,18 @@ namespace Server
                 }
                 catch (Exception ex)//legge l'eccezione
                 {
-                     return ex.ToString();//ritorna l'eccezione
+                    return ex.ToString();//ritorna l'eccezione
                 }
 
             }
-            
+
             else // se la chiave non risponde
             {
                 return "nokey";
             }
 
             return "nulla";//se non trova nulla
-            
+
         }
 
 
@@ -101,43 +101,18 @@ namespace Server
                         {
                             username = rdr.GetString(0);//setta la variabile username con l'username letta dell'istanza
                             password = rdr.GetString(1);//setta la variabile password con la password letta dell'istanza
-                            String nuovapassword = MD5GenerateHash(username+password);// crea una password unendo usn e psw dell'istanza e applicando la codifica MD5 alla stringa ottenuta
-                            
-                            cmd.Parameters.AddWithValue("@usn", username);
-                            cmd.Parameters.AddWithValue("@psw", nuovapassword);
-                            cmd.Parameters.AddWithValue("@eml", eml);
-                            cmd.CommandText = "UPDATE Users(Username, Password, Email) VALUES (@usn, @psw, @eml) WHERE Username='" + username + "' AND Email='" + eml + "'";
+                            String passwordDaInviare = username + password;
+                            String nuovapassword = MD5GenerateHash(username + password);// crea una password unendo usn e psw dell'istanza e applicando la codifica MD5 alla stringa ottenuta
 
-                            //modulo per mandare all'utente la nuova password
-                            SmtpClient smtpClient = new SmtpClient();
-                            NetworkCredential basicCredential = new NetworkCredential("noreply.diesis@gmail.com", "06021997Lucaf6-");
-                            MailMessage message = new MailMessage();
-                            MailAddress fromAddress = new MailAddress("noreply.diesis@gmail.com");
 
-                            smtpClient.Host = "smtp.gmail.com";
-                            smtpClient.UseDefaultCredentials = false;
-                            smtpClient.Credentials = basicCredential;
-                            smtpClient.Port = 587;
-                            smtpClient.EnableSsl = true;
+                            rdr.Close();
+                            sql = "    UPDATE Users SET Password = '" + nuovapassword + "' WHERE Username='" + username + "' AND Email='" + eml + "'   ";
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.ExecuteNonQuery();
 
-                            message.From = fromAddress;
-                            message.Subject = "Cambio della password";
-                            //Set IsBodyHtml to true means you can send HTML email.
-                            message.IsBodyHtml = true;
-                            message.Body = "Ci è stata inviata una richiesta per recuperare la tua password; la nuova password è:" + nuovapassword ;
-                            message.To.Add(eml);
-                            message.Priority = MailPriority.High;
+                            SendEmail(eml, "Reset della password", "Ciao " + username + ", Ci è stata inviata una richiesta per recuperare la tua password; la nuova password è:" + passwordDaInviare);
 
-                            try
-                            {
-                                smtpClient.Send(message);
-                            }
-                            catch (Exception ex)
-                            {
-                                //Error, could not send the message
-                                return ex.ToString();
-                            }
-                            
+                            return "ok";
                         }
                         break;
                     }
@@ -148,7 +123,7 @@ namespace Server
                     return ex.ToString();
 
                 }
-               
+
             }
             else
             {
@@ -156,7 +131,7 @@ namespace Server
             }
 
             return "nulla";
-        
+
         }
 
 
@@ -178,12 +153,10 @@ namespace Server
                     // string sql = "INSERT INTO `contatti` (`ID`, `Nome`, `email`, `Tel`) VALUES (NULL, 'xxx', 'xxx', 'xxx');";
                     string sql = "SELECT * FROM `users` WHERE username='" + usn + "'";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
-
-                    //script.Error += new MySqlScriptErrorEventHandler(script_Error);
-                    //script.ScriptCompleted += new EventHandler(script_ScriptCompleted);
-                    //script.StatementExecuted += new MySqlStatementExecutedEventHandler(script_StatementExecuted);
-
                     rdr = cmd.ExecuteReader();
+
+
+
                     while (rdr.Read())
                     {
                         if (rdr.GetString(0).Equals(usn))
@@ -200,31 +173,23 @@ namespace Server
 
                     }
 
+                    rdr.Close();//aggiunto
                     if (valido == true)
                     {
-                        
-                        sql = "INSERT INTO `users` (`Username`, `Password`, `Email`) VALUES ('"+usn+"', '"+psw+"', '"+eml+"')";
-                        cmd.ExecuteNonQuery();
+                        try
+                        {
+                            string nuovaPassword = MD5GenerateHash(psw);
+                            sql = "  INSERT INTO users (Username, Password, Email) VALUES ('" + usn + "', '" + nuovaPassword + "', '" + eml + "')  ";
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            return ex.ToString();
+                        }
 
-                        //modulo per mandare all'utente la nuova password via e-mail
-                        SmtpClient smtpClient = new SmtpClient();
-                        NetworkCredential basicCredential = new NetworkCredential("noreply.diesis@gmail.com", "06021997Lucaf6-");
-                        MailMessage message = new MailMessage();
-                        MailAddress fromAddress = new MailAddress("noreply.diesis@gmail.com");
 
-                        smtpClient.Host = "smtp.gmail.com";
-                        smtpClient.UseDefaultCredentials = false;
-                        smtpClient.Credentials = basicCredential;
-                        smtpClient.Port = 587;
-                        smtpClient.EnableSsl = true;
-
-                        message.From = fromAddress;
-                        message.Subject = "Cambio della password";
-                        //Set IsBodyHtml to true means you can send HTML email.
-                        message.IsBodyHtml = true;
-                        message.Body = "Grazie per esserti iscritto;\n Il tuo username è: @usn\n La tua password è: @psw (criptata)\n ";
-                        message.To.Add(eml);
-                        message.Priority = MailPriority.High;
+                        SendEmail(eml, "iscrizione a diesis#", "Grazie per esserti iscritto;\n Il tuo username è: " + usn + "\n La tua password è: " + psw + " (criptata)\n ");
 
                     }
 
@@ -264,13 +229,13 @@ namespace Server
                     string sql = "SELECT * FROM `files` WHERE username='" + usn + "'";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                    
+
                     rdr = cmd.ExecuteReader();
                     while (rdr.Read())
                     {
-                        if (rdr.GetString(0).Equals(usn))
+                        if (rdr.GetString(1).Equals(usn))
                         {
-                            tag.Add(rdr.GetString(2) + "-" + rdr.GetDateTime(3) + "-" + rdr.GetString(4) + "-" + rdr.GetString(5));
+                            tag.Add(rdr.GetString(2) + "-" + rdr.GetDateTime(3) + "-" + rdr.GetString(4) + "-" + rdr.GetString(5) + "-" + rdr.GetString(6));
                         }
 
                     }
@@ -300,47 +265,32 @@ namespace Server
 
 
         [WebMethod]
-        public string aggiungiTag(string key, string usn, string genere, DateTime data, string titolo, string indirizzo, string eml)
+        public string aggiungiTag(string key, string usn, string genere, string titolo, string indirizzo, string eml, int pubblico)
         {
             if (key.Equals("Unaacaso1997-"))
             {
-
                 string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;";
 
-                MySqlDataReader rdr = null;
                 try
                 {
+                    
+
+
                     MySqlConnection conn = new MySqlConnection(connStr);
                     conn.Open();
 
-                    string sql = "INSERT INTO `files` (`Key`, `Username`, `Genere`,'DataCreazione','Titolo','Link') VALUES ('" + null +"','" + genere +"', '" + data +"','" + titolo +"','" + indirizzo +"')";
 
+
+                    //string sql = "INSERT INTO `files` (  Username, Genere, DataCreazione, Titolo, Link) VALUES ('" + usn + "','" + genere + "', '"+ DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss") + "','" + titolo + "','" + indirizzo + "','" + pubblico + "')";
+                    string sql = "INSERT INTO `files` (`Id`, `Username`, `Genere`, `DataCreazione`, `Titolo`, `Link`, `Pubblico`)"+
+                                              "VALUES (NULL, '" + usn + "', '" + genere + "', '" + DateTime.Now.ToString("yyyyMMddHHmmss") + "', '" + titolo + "', '" + indirizzo + "', '" + pubblico.ToString() + "')";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.ExecuteNonQuery();
 
-
-
-                    //modulo per mandare all'utente la nuova password via e-mail
-                    SmtpClient smtpClient = new SmtpClient();
-                    NetworkCredential basicCredential = new NetworkCredential("noreply.diesis@gmail.com", "06021997Lucaf6-");
-                    MailMessage message = new MailMessage();
-                    MailAddress fromAddress = new MailAddress("noreply.diesis@gmail.com");
-
-                    smtpClient.Host = "smtp.gmail.com";
-                    smtpClient.UseDefaultCredentials = false;
-                    smtpClient.Credentials = basicCredential;
-                    smtpClient.Port = 587;
-                    smtpClient.EnableSsl = true;
-
-                    message.From = fromAddress;
-                    message.Subject = "Cambio della password";
-                    //Set IsBodyHtml to true means you can send HTML email.
-                    message.IsBodyHtml = true;
-                    message.Body = "Grazie per aver aggiunto un nuovo tag;\n        data registrazione: " + data + "\n        titolo: " + titolo + "\n      genere: " + genere + "\n ";
-                    message.To.Add(eml);
-                    message.Priority = MailPriority.High;
+                    SendEmail(eml, "Aggiunto un nuovo tag", "Ciao " + usn + ", Grazie per aver aggiunto un nuovo tag;\n        data registrazione: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n        titolo: " + titolo + "\n      genere: " + genere + "\n ");
 
                     conn.Close();
+
                 }
                 catch (Exception ex)
                 {
@@ -356,16 +306,175 @@ namespace Server
 
         }
 
-
-        public static string MD5GenerateHash(string inputString)//metodo che restituisce una stringa crittografata con il metodo MD%
+        [WebMethod]
+        public string SendEmail(string eml, string obj, string text)
         {
-            System.Security.Cryptography.MD5 hash = System.Security.Cryptography.MD5.Create();
-            Byte[] inputBytes = ASCIIEncoding.Default.GetBytes(inputString);
-            Byte[] outputBytes = hash.ComputeHash(inputBytes);
-            return Convert.ToBase64String(outputBytes);
+            SmtpClient smtpClient = new SmtpClient();
+            NetworkCredential basicCredential = new NetworkCredential("noreply.diesis@gmail.com", "06021997Lucaf6-");
+            MailMessage message = new MailMessage();
+            MailAddress fromAddress = new MailAddress("noreply.diesis@gmail.com");
+
+            smtpClient.Host = "smtp.gmail.com";
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = basicCredential;
+            smtpClient.Port = 587;
+            smtpClient.EnableSsl = true;
+
+            message.From = fromAddress;
+            message.Subject = " " + obj + " ";
+            //Set IsBodyHtml to true means you can send HTML email.
+            message.IsBodyHtml = true;
+            message.Body = "<h1>" + text + " </h1>";
+            message.To.Add(eml);
+            message.Priority = MailPriority.High;
+            try
+            {
+                smtpClient.Send(message);
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+
+            return "ok";
+
         }
 
+        [WebMethod]
+        public string CambioPsw(string key, string usn, string vecchiaPsw, string nuovaPsw, string eml)//metodo per recuperare la psw, si fa passare la chiave di sicurezza e email
+        {
+            if (key.Equals("Unaacaso1997-"))//se la chiave di sicurezza corrisponde esegui
+            {
+
+                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;";//stringa che definisce i parametri di connessione
+
+                MySqlDataReader rdr = null;//definisce il lettore di tipo MySsql 
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    conn.Open();
+
+                    string sql = "SELECT * FROM `users` WHERE email='" + eml + "' AND username='" + usn + "'  ";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
+                    while (rdr.Read())//fin quando riesce a leggere qualcosa
+                    {
+                        if (rdr.GetString(1).Equals(MD5GenerateHash(vecchiaPsw)))//se email ricevuta è uguala a quella dell'istanza 
+                        {
+
+                            String nuovapassword = MD5GenerateHash(nuovaPsw);// crea una password unendo usn e psw dell'istanza e applicando la codifica MD5 alla stringa ottenuta
+
+                            rdr.Close();
+                            sql = "    UPDATE Users SET Password = '" + nuovapassword + "' WHERE Username='" + usn + "' AND Email='" + eml + "'   ";
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.ExecuteNonQuery();
+
+                            SendEmail(eml, "cambio della password", "Ciao " + usn + ", ci è stata inviata una richiesta per cambiare la tua password;\n   la vecchia password:" + vecchiaPsw + "\n è stata sostituita con:" + nuovaPsw + "  ");
+
+                            return "ok";
+                        }
+                        break;
+                    }
+                    conn.Close();//chiude la connessione con il DB
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+
+                }
+
+            }
+            else
+            {
+                return "nokey";
+            }
+
+            return "nulla";
 
 
+        }
+
+        
+        public string MD5GenerateHash(string inputString)//metodo che restituisce una stringa crittografata con il metodo MD%
+        {
+            //System.Security.Cryptography.MD5 hash = System.Security.Cryptography.MD5.Create();
+            //Byte[] inputBytes = ASCIIEncoding.Default.GetBytes(inputString);
+            //Byte[] outputBytes = hash.ComputeHash(inputBytes);
+            //return Convert.ToBase64String(outputBytes);
+            // Use input string to calculate MD5 hash
+            using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
+            {
+                byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(inputString);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X").ToLower());
+                }
+                return sb.ToString();
+
+            }
+
+
+
+        }
+
+        [WebMethod]
+        public string CambioEml(string key, string usn, string vecchiaEml, string nuovaEml)//metodo per recuperare la psw, si fa passare la chiave di sicurezza e email
+        {
+            if (key.Equals("Unaacaso1997-"))//se la chiave di sicurezza corrisponde esegui
+            {
+
+                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;";//stringa che definisce i parametri di connessione
+
+                MySqlDataReader rdr = null;//definisce il lettore di tipo MySsql 
+                try
+                {
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    conn.Open();
+
+                    string sql = "SELECT * FROM `users` WHERE email='" + vecchiaEml + "' AND username='" + usn + "'  ";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
+                    while (rdr.Read())//fin quando riesce a leggere qualcosa
+                    {
+                        if (rdr.GetString(2).Equals(vecchiaEml))//se email ricevuta è uguala a quella dell'istanza 
+                        {
+
+                            rdr.Close();
+                            sql = "    UPDATE Users SET Email = '" + nuovaEml + "' WHERE Username='" + usn + "' ";
+                            cmd = new MySqlCommand(sql, conn);
+                            cmd.ExecuteNonQuery();
+
+                            SendEmail(nuovaEml, "cambio della email", "Ciao " + usn + ", ci è stata inviata una richiesta per cambiare la tua e-mail;\n   la vecchia email:" + vecchiaEml + "\n è stata sostituita con:" + nuovaEml + "  ");
+
+                            return "ok";
+                        }
+                        break;
+                    }
+                    conn.Close();//chiude la connessione con il DB
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+
+                }
+
+            }
+            else
+            {
+                return "nokey";
+            }
+
+            return "nulla";
+
+
+        }
+
+       
     }
 }
