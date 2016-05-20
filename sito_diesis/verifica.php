@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<script type="text/javascript" src="chkLogin.js"></script>
+	<script type="text/javascript" src="js/chkVerifica.js"></script>
     <title>Verifica disponibilità</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
@@ -83,7 +83,7 @@
 			<h3>Verifica disponibilità</h3>
 			<input type="text" name="username" id="username" placeholder="username"/><br/></br>
 			<input type="text" name="email" id="email" placeholder="example@example.com"/><br/><br/>
-			<button>Verifica</button>
+			<input id="registrati" type="submit" value="registrati" onclick="return chkVerifica()">
 			<br/>Sei già iscritto? <a href="login.php">Effettua il login!</a>
 	</form>
 	

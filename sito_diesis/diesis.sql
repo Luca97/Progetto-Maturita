@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mag 16, 2016 alle 17:48
+-- Generation Time: Mag 20, 2016 alle 08:45
 -- Versione del server: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -27,21 +27,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `files` (
-  `Key` int(200) NOT NULL AUTO_INCREMENT,
+  `Id` int(200) NOT NULL AUTO_INCREMENT,
   `Username` char(20) NOT NULL,
   `Genere` varchar(50) NOT NULL,
   `DataCreazione` date NOT NULL,
   `Titolo` varchar(50) NOT NULL,
   `Link` varchar(255) NOT NULL,
   `Pubblico` tinyint(1) NOT NULL,
-  PRIMARY KEY (`Key`)
+  PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dump dei dati per la tabella `files`
 --
 
-INSERT INTO `files` (`Key`, `Username`, `Genere`, `DataCreazione`, `Titolo`, `Link`, `Pubblico`) VALUES
+INSERT INTO `files` (`Id`, `Username`, `Genere`, `DataCreazione`, `Titolo`, `Link`, `Pubblico`) VALUES
 (1, 'whmori', 'Rock', '2016-04-05', 'Smell like teen spirit', 'http://www.whmori.ciao', 1),
 (2, 'whmori', 'Indie rock', '2016-04-20', '505', 'http://www.whmori.ciao', 1),
 (3, 'whmori', 'Rock', '2016-04-03', 'In bloom', 'http://www.whmori.ciao', 0),
@@ -70,6 +70,7 @@ INSERT INTO `users` (`Username`, `Password`, `Email`) VALUES
 ('larry', '698d51a19d8a121ce581499d7b701668', 'larry@gmail,com'),
 ('larry2', '698d51a19d8a121ce581499d7b701668', 'larry2@gmail.com'),
 ('larry3', '698d51a19d8a121ce581499d7b701668', 'larry3@gmail.com'),
+('moribello', '698d51a19d8a121ce581499d7b701668', 'moribello@gmail.com'),
 ('whmori', '698d51a19d8a121ce581499d7b701668', 'gabrielemori@outlook.com'),
 ('whmori2', '698d51a19d8a121ce581499d7b701668', 'whmori2@gmail.com');
 

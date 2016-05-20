@@ -30,11 +30,6 @@
     <![endif]-->
 
 </head>
-<?php 
-	
-	if(!isset($_SESSION["username"]))//Se non sei autenticato, non puoi accedere a questa pagine e vieni reindirizzato alla pagina di login
-		echo header("location: login.php");
-?>
 <body>
 
     <!-- Navigation -->
@@ -59,14 +54,6 @@
                     <li>
                         <a href="#">Home</a>
                     </li>
-                    <li>
-                        <a href="contact.php">Contatti</a>
-                    </li>
-					<li>
-						<a href="cambiaEmail.php">Cambia email</a>
-					</li>
-					<li>
-						<a href="logout.php">Logout</a>
 					</li>
                 </ul>
             </div>
@@ -81,12 +68,12 @@
 	<div id="immagine">
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
-	<form id="form" name="form1" method="post" action="check_dimenticoPassword.php">
-			Username :
-			<input name="Username" type="text" id="Username"/>
-			Email:
-			<input name="email" type="mail" id="email"/>
-			<input type="submit" name="Submit" value="Submit"/>
+	<form class="form" method="post" action="check_dimenticoPassword.php">
+			
+			<input name="Username" type="text" id="Username" placeholder="Username"/>			
+			<input name="email" type="mail" id="email" placeholder="Email"/>
+			<input type="submit" name="Submit" value="RECUPERA"/>
+			<br/>Torna alla pagina di <a href="login.php">login</a>
 	</form>
 	
        <!-- <div class="row">

@@ -78,7 +78,8 @@ class dbClass {
 			
 			if($count==1) 
 			{ 
-				//$_SESSION['login_user']=$username; 
+				// session_start();
+				// $_SESSION['username']=$username; 
 				header("location: manageCr.php"); 
 			} 
 			else 
@@ -155,6 +156,7 @@ class dbClass {
 	
 	function check_cambiaEmail($UsernameRequest,$Password,$newEmail)
 	{
+			session_start();
 			
 			$sql="select email, Password
 				  from users
@@ -163,16 +165,18 @@ class dbClass {
 			$Result=mysqli_query($this->con,$sql);
 			$Dati= mysqli_fetch_object($Result);
 			
-			if($Dati->Password!=$Password)
+			if(!$Password || !$newEmail)
 			{
-				header("Location:cambiaEmail.php");
-				//con il ritorno dell'errore nel form, ancora non so come si fa :|
-				break;
-			}
-			else if(!$Password || !$newEmail)
-			{
+				$_SESSION['errore']="I campi non possono restare vuoti";
 				header("Location:cambiaEmail.php");
 				//stessa cosa di sopra
+				break;
+			}
+			
+			if($Dati->Password!=$Password)
+			{
+				$_SESSION['errore']="Hai inserito una password sbagliata";
+				header("Location:cambiaEmail.php");
 				break;
 			}
 			
@@ -198,6 +202,8 @@ class dbClass {
 	
 	function check_cambiaPassword($newPassword,$UsernameRequest,$oldPassword,$secondNewPassword)
 	{
+	
+		session_start();
 		$sql="select Password
 			  from users
 			  where Username='$UsernameRequest'";
@@ -207,6 +213,7 @@ class dbClass {
 		
 		if($Dati->Password!=$oldPassword)
 		{
+			$errore="Hai inserito una password sbagliata";
 			header("Location:index.php");
 			//con il ritorno dell'errore nel form, ancora non so come si fa :|
 			break;
@@ -287,10 +294,12 @@ class dbClass {
 			echo "Error updating record: " . $connessione->error;
 		}
 		
-		email($email,$oggettoMail, $testoMail);
+		$url = ""; 
+		$client = new SoapClient($url, array("trace" => 1, "exception" => 0));
+		$client->__soapCall("emailPHP",array($Dati->Email,$oggettoMail,$testoMail));
 		
 		header("Location:dimenticoPassword.php");
+		}
 	}
-}
 }
 ?>

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<script type="text/javascript" src="chkLogin.js"></script>
+	<script type="text/javascript" src="js/chkVerifica.js"></script>
     <title>Cambia e-mail</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
@@ -32,7 +32,7 @@
 </head>
 
 <?php 
-	
+	session_start();
 	if(!isset($_SESSION["username"]))//Se non sei autenticato, non puoi accedere a questa pagine e vieni reindirizzato alla pagina di login
 		echo header("location: login.php");
 		
@@ -84,13 +84,15 @@
 			<img src="logo.png" style="width: 350px;height: 200px;">
 	</div>
 	<form class="form" method="post" action="check_cambiaEmail.php">
+		<?php if(isset($_SESSION['errore'])) echo $_SESSION['errore'];
+			  if(isset($_SESSION['errore'])) unset($_SESSION['errore']);?>
 			<h2>Username:</h2>
 			<input name="Username" type="text" id="Username"/>
 			<h2>Password corrente:</h2>
 			<input name="Password" type="password" id="Password"/>
 			<h2>Nuova email:</h2>
 			<input name="newEmail" type="mail" id="newEmail"/>
-			<input type="submit" name="Submit" value="Submit"/>
+			<input type="submit" name="Submit" value="Submit" onclick="return chkNewMail()"/>
 	</form>
 	
        <!-- <div class="row">

@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<script type="text/javascript" src="chkLogin.js"></script>
     <title>Registrazione</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
@@ -16,7 +15,7 @@
 	<link href="css/styleIndex.css" rel="stylesheet">
 	
 	<!--<link href="style.css" rel="stylesheet">-->
-	<script type="text/javascript" src="chkRegistra.js"></script>
+	<script type="text/javascript" src="js/chkRegistra.js"></script>
 	
     
 	<!-- Custom CSS -->
@@ -82,7 +81,7 @@
 																echo "value=$email";}?>><br/><br/>-->
 			<!--<h4>Inserire password:</h4>--><input type="password" name="password" id="password" placeholder="Scegli una password"/><br/><br/>
 			<!--<h4>Conferma password:</h4>--><input type="password" name="confPass" id="confPass" placeholder="Conferma password"/><br/><br/>
-			<button>Registrati</button>
+			<input id="registrati" type="submit" value="registrati" onclick="return chkRegistra()">
 			<br/>Sei gia' iscritto? <a href="login.php">Login!</a>
 		</form>
 	

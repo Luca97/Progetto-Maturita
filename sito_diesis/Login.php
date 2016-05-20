@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-	<script type="text/javascript" src="chkLogin.js"></script>
+	<script type="text/javascript" src="js/chkLogin.js"></script>
     <title>Login</title>
 	<!--<link href="style.css" rel="stylesheet">-->
     <!-- Bootstrap Core CSS -->
@@ -73,6 +73,7 @@
 			<input type="password" name="password" id="password" placeholder="password"/><br/><br/>
 			<button>Login</button>
 			<br/>Non sei ancora iscritto? <a href="verifica.php">Registrati!</a>
+			<br/>Hai dimenticato la password? <a href="dimenticoPassword.php">Recuperala!</a>
 	</form>
 	
        <!-- <div class="row">
