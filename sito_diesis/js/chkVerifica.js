@@ -17,6 +17,12 @@ function chkVerifica()
 		mail.focus;
 		sentinella= false; //controllo se l'email è valida
 	}
+		
+	if(user.indexOf('=')>=0 || user.indexOf('*')>=0) 
+	{
+		sentinella = false;
+		alert("campo non valido");
+	}
 	
 	return sentinella;
 }
