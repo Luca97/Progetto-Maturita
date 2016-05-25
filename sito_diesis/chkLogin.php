@@ -7,9 +7,9 @@ $psw = md5($password); //in $psw c'è ora la password criptata.
 $_SESSION["username"] = $username;
 
 if (strpos($password, '*') == true | strpos($password, '=') == true) 
-	{
-		header("Location:Login.php");
-	}
+{
+	header("Location:Login.php");
+}
 	
 	
 include "dbClass.php";

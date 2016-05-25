@@ -59,6 +59,7 @@ class dbClass {
 			$errore= "Failed to connect to MySQL: ";
 	}
 	
+	
 	public function chkLogin($username,$psw)
 	{
 		if ($this->con->connect_error) 
@@ -200,7 +201,7 @@ class dbClass {
 	
 	}
 	
-	function check_cambiaPassword($newPassword,$UsernameRequest,$oldPassword,$secondNewPassword)
+	function check_cambiaPassword($newPassword,$UsernameRequest,$oldPassword,$secondNewPassword) //funzione che modifica la password
 	{
 	
 		session_start();
@@ -213,21 +214,16 @@ class dbClass {
 		
 		if($Dati->Password!=$oldPassword)
 		{
-			$errore="Hai inserito una password sbagliata";
-			header("Location:index.php");
-			//con il ritorno dell'errore nel form, ancora non so come si fa :|
+			$_SESSION['errore']="Errore nell'inserimento password";
+			header("Location:cambiaPassword.php");
+			//con il ritorno dell'errore nel form
 			break;
 		}
 		
 		if($newPassword!=$secondNewPassword)
 		{
-			header("Location:index.php");
-			//stessa cosa di sopra
-			break;
-		}
-		else if(!$oldPassword)
-		{
-			header("Location:index.php");
+			$_SESSION['errore']="Le due password non coincidono";
+			header("Location:cambiaPassword.php");
 			//stessa cosa di sopra
 			break;
 		}
@@ -250,27 +246,93 @@ class dbClass {
 					echo "Error updating record: " . $this->con->error;
 				}
 			$this->con->close();
+			header("Location:index.php");
+		}
 	}
-	header("Location:index.php");
-	}
-	
-	function check_dimenticoPassword($UsernameRequest,$email)
+	function checkSession()
 	{
+		session_start();
+		
+		if(!isset($_SESSION["username"]))//Se non sei autenticato, non puoi accedere a questa pagine e vieni reindirizzato alla pagina di login
+			echo header("location: login.php");
+		
+	}
+	function dataGrid()
+	{
+		$query="";
+		
+		
+		if(isset($_POST["genere"]) && isset($_POST["nome"]))
+		{
+			//echo "sono dentro ".$_POST['genere'].$_POST['nome'].$username.$pubblico;
+		if($_POST["genere"]!="" && $_POST["nome"]=="")
+		{
+			$genere=$_POST["genere"]; //echo "sono qui 1 solo gen";
+			
+			if(strtolower($genere)=="*" || strtolower($genere)=="tutti" || strtolower($genere)=="all")			
+				$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=1 ORDER BY Titolo";
+			else
+				$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=1 AND Genere='$genere'ORDER BY Titolo";
+		}
+		else
+		
+		if($_POST["genere"]=="" && $_POST["nome"]!="")
+		{
+			$nome=$_POST["nome"];// echo "sono qui 2 solo nome $nome";
+			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=1 AND Titolo='$nome'";
+		}
+		else		
+			
+		if($_POST["genere"]!="" && $_POST["nome"]!="")
+		{
+			$genere=$_POST["genere"];
+			$nome=$_POST["nome"]; //echo "sono qui 3 entrambi $genere $nome";
+			
+			if(strtolower($genere)=="*" || strtolower($genere)=="tutti" || strtolower($genere)=="all")			
+				$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=1 AND Titolo='$nome' ORDER BY Titolo";
+			else
+				$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=1 AND Titolo='$nome' AND Genere='$genere'";
+		}
+		}
+		else{//echo "sono fuori".$username.$pubblico;
+			$query="SELECT Titolo,Genere,DataCreazione,Link FROM Files WHERE Pubblico=1 ORDER BY Titolo";
+		}
+		return $query;
+	}
+	function check_dimenticoPassword($UsernameRequest,$email) //funzione che recupera password dimenticata tramite invio email
+	{	
+		session_start();
 		$sql="select Email
 			from users
 			WHERE Username = '$UsernameRequest'
 			";
 		$connessione=$this->con;	
-	$Result=mysqli_query($connessione,$sql);
-	$Dati= mysqli_fetch_object($Result);
+		$Result=mysqli_query($connessione,$sql);
+		$Dati= mysqli_fetch_object($Result);
+	
+		if(!$Result)
+		{
+			$_SESSION['errore']="Lo username è inesistente";
+			header("Location:dimenticoPassword.php");
+			break;
+		}
+		
+		if(!$email || !$UsernameRequest)
+		{
+			$_SESSION['errore']="I campi non possono essere vuoti";
+			header("Location:dimenticoPassword.php");
+			//con il ritorno dell'errore nel form
+			break;
+		}
 		
 		if($Dati->Email!=$email)
 		{
-			header("Location:index.php");
-			//con il ritorno dell'errore nel form, ancora non so come si fa :|
+			$_SESSION['errore']="Email errata";
+			header("Location:dimenticoPassword.php");
+			//con il ritorno dell'errore nel form
 			break;
 		}
-	
+	//invio dell'email per cambiare la password
 	if(isset($_POST['Submit']))
 	{		
 		$newPassword = "newPassword";
@@ -294,9 +356,9 @@ class dbClass {
 			echo "Error updating record: " . $connessione->error;
 		}
 		
-		$url = ""; 
+		/*$url = ""; 
 		$client = new SoapClient($url, array("trace" => 1, "exception" => 0));
-		$client->__soapCall("emailPHP",array($Dati->Email,$oggettoMail,$testoMail));
+		$client->__soapCall("emailPHP",array($Dati->Email,$oggettoMail,$testoMail));*/
 		
 		header("Location:dimenticoPassword.php");
 		}

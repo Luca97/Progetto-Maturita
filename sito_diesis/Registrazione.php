@@ -1,69 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php 
+session_start();
+if(isset($_SESSION["username"]))
+		echo header("location: manageCr.php");
+?>
 
-<head>
+<?php $_POST["pagina"]="login.php"; $_POST["titolo"]="Login"; $_POST["src"]="js/chkRegistra.js"; include "layout/headEsterni.php";?>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Registrazione</title>
-	<!--<link href="style.css" rel="stylesheet">-->
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/styleIndex.css" rel="stylesheet">
-	
-	<!--<link href="style.css" rel="stylesheet">-->
-	<script type="text/javascript" src="js/chkRegistra.js"></script>
-	
-    
-	<!-- Custom CSS -->
-    <style>
-    body {
-        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-    }
-    </style>
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-</head>
 <body>
 
 	
 	<!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand">Diesis#</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="contact.php">Contact</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
+    <?php $_POST["pagina"]="registrazione.php"; include "layout/navbarEsterni.php";?>
 
     <!-- Page Content -->
     <div class="container">
@@ -84,19 +31,6 @@
 			<input id="registrati" type="submit" value="registrati" onclick="return chkRegistra()">
 			<br/>Sei gia' iscritto? <a href="login.php">Login!</a>
 		</form>
-	
-       <!-- <div class="row">
-            <div class="col-lg-12 text-center">
-                <h1>A Bootstrap Starter Template</h1>
-                <p class="lead">Complete with pre-defined file paths that you won't have to change!</p>
-                <ul class="list-unstyled">
-                    <li>Bootstrap v3.3.6</li>
-                    <li>jQuery v1.11.1</li>
-                </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
     </div>
     <!-- /.container -->
 
@@ -107,5 +41,5 @@
     <script src="js/bootstrap.min.js"></script>
 	
 </body>
+</html><!--Chiude il tag aperto dall'head-->
 
-</html>

@@ -1,8 +1,7 @@
 <?php
-	session_start();
-	
-	if(!isset($_SESSION["username"]))//Se non sei autenticato, non puoi accedere a questa pagine e vieni reindirizzato alla pagina di login
-		echo header("location: login.php");
+	include "dbClass.php";
+	$db= new dbClass;
+	$db->checkSession();
 		
 	session_unset();
 	//session_destroy();
