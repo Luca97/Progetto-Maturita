@@ -13,23 +13,23 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <?php 
-					
-					  $link=array("about.php","home.php","contact.php","visualizza.php","biblioteca.php","elencoUtenti.php","manageCr.php","logout.php");
-					  $link2=array("About","Home","Contatti","Miei XML","Biblioteca XML","Elenco/Ricerca utenti","Area utente","Logout");
-					  
-					  $pagina=$_POST["pagina"];
-					
-					  for($i=0;$i<sizeof($link);$i++)
-					  {
-						if($pagina==$link[$i])
-							$i=$i;//Non fare nulla
-						else
-						   echo "<li>
-									<a href=$link[$i]>$link2[$i]</a>
-								</li>";
-					  }
-					?>
+				<?php 
+				  //Vettori contenenti le pagine del sito e i nomi del menu a cui esse corrispondono
+				  $link=array("about.php","home.php","contact.php","visualizza.php","biblioteca.php","elencoUtenti.php","manageCr.php","logout.php");
+				  $link2=array("About","Home","Contatti","Miei XML","Biblioteca XML","Elenco/Ricerca utenti","Area utente","Logout");
+				  
+				  $pagina=$_POST["pagina"];
+				
+				  for($i=0;$i<sizeof($link);$i++)
+				  {
+					if($pagina==$link[$i])//Se la pagina in cui viene incluso il menu, è presente nel vettore, non creo un tasto "pagina" nel menu
+						$i=$i;//Non fare nulla
+					else
+					   echo "<li>
+								<a href=$link[$i]>$link2[$i]</a>
+							</li>";
+				  }
+				?>
 					 
                 </ul>
             </div>
