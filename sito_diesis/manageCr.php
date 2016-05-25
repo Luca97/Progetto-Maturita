@@ -28,9 +28,12 @@
 			<!--<img src="logo.png" style="width:200;">-->
 		</div>
 		<form class="form" method="POST">
+		
 			<h2>Area utente</h2>
 			<?php 
 				include "layout/elementClass.php";
+				if(isset($_GET["log"]))
+					echo "<h2>Benvenuto $username!</h2>";
 				$el= new elementClass;
 				$el->table($vInfo,$ar);
 			?>

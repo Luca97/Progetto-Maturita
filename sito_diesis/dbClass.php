@@ -41,8 +41,9 @@ class dbClass {
 	{	
 		
 	  // Fetch one and one row
-		while ($row=mysqli_fetch_row($result))//Mentre esiste una riga, quindi la fetch contiene una risposta all'interrogazione
-		//Il ciclo stampa il suo contenuto, $row è un vettore di righe
+		while ($row=mysqli_fetch_row($result))//Mentre esiste una riga, quindi 
+		//la fetch contiene una risposta all'interrogazione
+		//Il ciclo stampa il suo contenuto, $row contiene la risposta "n" del db
 		{
 			//printf ("%s (%s)\n",$row[0],$row[1]);
 			$righe[$i]=implode(";",$row);
@@ -81,7 +82,7 @@ class dbClass {
 			{ 
 				// session_start();
 				// $_SESSION['username']=$username; 
-				header("location: manageCr.php"); 
+				header("location: manageCr.php?log=1"); 
 			} 
 			else 
 			{ 
