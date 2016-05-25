@@ -1,6 +1,7 @@
 function chkLogin()
 {
-	if(document.getElementById("nome").value=="" | document.getElementById("pass").value=="")
+	if(document.getElementById("username").value=="" 
+		| document.getElementById("password").value=="")
 	{
 		alert("Campi vuoti");
 		return false;
