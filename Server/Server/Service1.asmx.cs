@@ -11,6 +11,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Security.Cryptography;
 
+
 namespace Server
 {
     /// <summary>
@@ -31,24 +32,23 @@ namespace Server
             if (key.Equals("Unaacaso1997-"))//se la chiave di sicurezza corrisponde esegui
             {
                 //ricerca credenziali nel database sql
-
-                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;"; //stringa che definisce i parametri di connessione
-                MySqlDataReader rdr = null; //definisce il lettore di tipo MySsql 
+                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;"; //stringa che definisce i parametri di connessione al DB
+                MySqlDataReader rdr = null; //definisce il lettore di tipo MySqlReader 
 
                 try //prova a lavorare sul DB
                 {
                     MySqlConnection conn = new MySqlConnection(connStr);//crea una connessione con i parametri della stringa
-                    conn.Open();//crea la connessione
+                    conn.Open();//apre la connessione
 
                     string sql = "SELECT * FROM `users` WHERE username='" + usn + "'";//definisce l'interrogazione da eseguire sul database
                     MySqlCommand cmd = new MySqlCommand(sql, conn);//crea un comando MySql con connessione e query
 
                     rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
-                    while (rdr.Read())//fin quando riesce a leggere qualcosa
+                    while (rdr.Read())//fin quando il lettore riesce a leggere qualcosa
                     {
-                        if (rdr.GetString(0).Equals(usn) && rdr.GetString(1).Equals(MD5GenerateHash(psw)))//se usn e psw ricevuti sono uguali a quella dell'istanza 
+                        if (rdr.GetString(0).Equals(usn) && rdr.GetString(1).Equals(MD5GenerateHash(psw)))//se usn e psw(criptata) ricevuti sono uguali a quella dell'istanza 
                         {
-                            return "ok";// allora ritorna ok
+                            return "ok" ;// allora ritorna e-mail utente
                         }
 
                     }
@@ -61,7 +61,7 @@ namespace Server
 
             }
 
-            else // se la chiave non risponde
+            else //se la chiave non risponde
             {
                 return "nokey";
             }
@@ -82,30 +82,29 @@ namespace Server
                 String password = ""; //variabile per salvare la password dell'istanza
                 String username = ""; //variabile per salvare l'username dell'istanza
 
-                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;";//stringa che definisce i parametri di connessione
+                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;";//stringa che definisce i parametri di connessione al DB
 
-                MySqlDataReader rdr = null;//definisce il lettore di tipo MySsql 
+                MySqlDataReader rdr = null;//definisce il lettore di tipo MySqlReader 
                 try
                 {
-                    MySqlConnection conn = new MySqlConnection(connStr);
-                    conn.Open();
+                    MySqlConnection conn = new MySqlConnection(connStr);//crea una connessione con i parametri della stringa
+                    conn.Open();//apre la connessione
 
-                    // string sql = "INSERT INTO `contatti` (`ID`, `Nome`, `email`, `Tel`) VALUES (NULL, 'xxx', 'xxx', 'xxx');";
-                    string sql = "SELECT * FROM `users` WHERE email='" + eml + "'";
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    string sql = "SELECT * FROM `users` WHERE email='" + eml + "'";//definisce l'interrogazione da eseguire sul database
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);//crea un comando MySql con connessione e query
 
                     rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
                     while (rdr.Read())//fin quando riesce a leggere qualcosa
                     {
                         if (rdr.GetString(2).Equals(eml))//se email ricevuta è uguala a quella dell'istanza 
                         {
-                            username = rdr.GetString(0);//setta la variabile username con l'username letta dell'istanza
-                            password = rdr.GetString(1);//setta la variabile password con la password letta dell'istanza
-                            String passwordDaInviare = username + password;
-                            String nuovapassword = MD5GenerateHash(username + password);// crea una password unendo usn e psw dell'istanza e applicando la codifica MD5 alla stringa ottenuta
+                            username = rdr.GetString(0);//setta la variabile username con l'username letta dall'istanza
+                            password = rdr.GetString(1);//setta la variabile password con la password letta dall'istanza
+                            String passwordDaInviare = username + password;//crea la nuova password unendo usn e psw dell'istanza 
+                            String nuovapassword = MD5GenerateHash(username + password);// crea la nuova password unendo usn e psw dell'istanza e applicando la codifica MD5 alla stringa ottenuta
 
 
-                            rdr.Close();
+                            rdr.Close();//chiude il lettore
                             sql = "    UPDATE Users SET Password = '" + nuovapassword + "' WHERE Username='" + username + "' AND Email='" + eml + "'   ";
                             cmd = new MySqlCommand(sql, conn);
                             cmd.ExecuteNonQuery();
@@ -265,7 +264,7 @@ namespace Server
 
 
         [WebMethod]
-        public string aggiungiTag(string key, string usn, string genere, string titolo, string indirizzo, string eml, int pubblico)
+        public string aggiungiTag(string key, string usn, string genere, string titolo, string indirizzo, int pubblico)
         {
             if (key.Equals("Unaacaso1997-"))
             {
@@ -287,7 +286,7 @@ namespace Server
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     cmd.ExecuteNonQuery();
 
-                    SendEmail(eml, "Aggiunto un nuovo tag", "Ciao " + usn + ", Grazie per aver aggiunto un nuovo tag;\n        data registrazione: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n        titolo: " + titolo + "\n      genere: " + genere + "\n ");
+                    SendEmail( GetEmail(usn), "Aggiunto un nuovo tag", "Ciao " + usn + ", Grazie per aver aggiunto un nuovo tag;\n        data registrazione: " + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "\n        titolo: " + titolo + "\n      genere: " + genere + "\n ");
 
                     conn.Close();
 
@@ -305,6 +304,7 @@ namespace Server
             }
 
         }
+
 
         [WebMethod]
         public string SendEmail(string eml, string obj, string text)
@@ -340,8 +340,9 @@ namespace Server
 
         }
 
+
         [WebMethod]
-        public string CambioPsw(string key, string usn, string vecchiaPsw, string nuovaPsw, string eml)//metodo per recuperare la psw, si fa passare la chiave di sicurezza e email
+        public string CambioPsw(string key, string usn, string vecchiaPsw, string nuovaPsw)//metodo per recuperare la psw, si fa passare la chiave di sicurezza e email
         {
             if (key.Equals("Unaacaso1997-"))//se la chiave di sicurezza corrisponde esegui
             {
@@ -354,7 +355,7 @@ namespace Server
                     MySqlConnection conn = new MySqlConnection(connStr);
                     conn.Open();
 
-                    string sql = "SELECT * FROM `users` WHERE email='" + eml + "' AND username='" + usn + "'  ";
+                    string sql = "SELECT * FROM `users` WHERE email='" + GetEmail(usn) + "' AND username='" + usn + "'  ";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                     rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
@@ -370,7 +371,7 @@ namespace Server
                             cmd = new MySqlCommand(sql, conn);
                             cmd.ExecuteNonQuery();
 
-                            SendEmail(eml, "cambio della password", "Ciao " + usn + ", ci è stata inviata una richiesta per cambiare la tua password;\n   la vecchia password:" + vecchiaPsw + "\n è stata sostituita con:" + nuovaPsw + "  ");
+                            SendEmail(GetEmail(usn), "cambio della password", "Ciao " + usn + ", ci è stata inviata una richiesta per cambiare la tua password;\n   la vecchia password:" + vecchiaPsw + "\n è stata sostituita con:" + nuovaPsw + "  ");
 
                             return "ok";
                         }
@@ -398,11 +399,7 @@ namespace Server
         
         public string MD5GenerateHash(string inputString)//metodo che restituisce una stringa crittografata con il metodo MD%
         {
-            //System.Security.Cryptography.MD5 hash = System.Security.Cryptography.MD5.Create();
-            //Byte[] inputBytes = ASCIIEncoding.Default.GetBytes(inputString);
-            //Byte[] outputBytes = hash.ComputeHash(inputBytes);
-            //return Convert.ToBase64String(outputBytes);
-            // Use input string to calculate MD5 hash
+            
             using (System.Security.Cryptography.MD5 md5 = System.Security.Cryptography.MD5.Create())
             {
                 byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(inputString);
@@ -421,6 +418,7 @@ namespace Server
 
 
         }
+
 
         [WebMethod]
         public string CambioEml(string key, string usn, string vecchiaEml, string nuovaEml)//metodo per recuperare la psw, si fa passare la chiave di sicurezza e email
@@ -475,6 +473,57 @@ namespace Server
 
         }
 
+
+        [WebMethod]
+        public string InviaFile(string key, string address)
+        {
+
+            
+            if(key.Equals("Unaacaso1997-"))
+            {
+
+                return "ok";
+            }
+            else
+            {
+                return "nokey";
+            }
+
+        }
+
+
+        public string GetEmail(string usn)
+        {
+
+            //ricerca credenziali nel database sql
+            string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;"; //stringa che definisce i parametri di connessione al DB
+            MySqlDataReader rdr = null; //definisce il lettore di tipo MySqlReader 
+
+            try //prova a lavorare sul DB
+            {
+                MySqlConnection conn = new MySqlConnection(connStr);//crea una connessione con i parametri della stringa
+                conn.Open();//apre la connessione
+
+                string sql = "SELECT * FROM `users` WHERE username='" + usn + "'";//definisce l'interrogazione da eseguire sul database
+                MySqlCommand cmd = new MySqlCommand(sql, conn);//crea un comando MySql con connessione e query
+
+                rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
+                while (rdr.Read())//fin quando il lettore riesce a leggere qualcosa
+                {
+                    if (rdr.GetString(0).Equals(usn) && rdr.GetString(1).Equals(MD5GenerateHash(psw)))//se usn e psw(criptata) ricevuti sono uguali a quella dell'istanza 
+                    {
+                        return rdr.GetString(2);// allora ritorna e-mail utente
+                    }
+
+                }
+                conn.Close();//chiude la connessione
+            }
+            catch (Exception ex)//legge l'eccezione
+            {
+                return ex.ToString();//ritorna l'eccezione
+            }
+            
+        }
        
     }
 }
