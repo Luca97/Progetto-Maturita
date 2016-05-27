@@ -367,7 +367,7 @@ namespace Server
                             String nuovapassword = MD5GenerateHash(nuovaPsw);// crea una password unendo usn e psw dell'istanza e applicando la codifica MD5 alla stringa ottenuta
 
                             rdr.Close();
-                            sql = "    UPDATE Users SET Password = '" + nuovapassword + "' WHERE Username='" + usn + "' AND Email='" + eml + "'   ";
+                            sql = "    UPDATE Users SET Password = '" + nuovapassword + "' WHERE Username='" + usn + "' AND Email='" + GetEmail(usn) + "'   ";
                             cmd = new MySqlCommand(sql, conn);
                             cmd.ExecuteNonQuery();
 
@@ -510,7 +510,7 @@ namespace Server
                 rdr = cmd.ExecuteReader();//Invia CommandText a Connection e compila SqlDataReader
                 while (rdr.Read())//fin quando il lettore riesce a leggere qualcosa
                 {
-                    if (rdr.GetString(0).Equals(usn) && rdr.GetString(1).Equals(MD5GenerateHash(psw)))//se usn e psw(criptata) ricevuti sono uguali a quella dell'istanza 
+                    if (rdr.GetString(0).Equals(usn))//se usn e psw(criptata) ricevuti sono uguali a quella dell'istanza 
                     {
                         return rdr.GetString(2);// allora ritorna e-mail utente
                     }
@@ -522,7 +522,7 @@ namespace Server
             {
                 return ex.ToString();//ritorna l'eccezione
             }
-            
+            return "nulla";
         }
        
     }
