@@ -14,7 +14,7 @@ html {
   z-index: 1;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
 }
 html:before {
   content: '';
@@ -35,8 +35,7 @@ html:before {
           transform: scale(1.1);
 }
 
-
-.form {
+.form2 {
   position: relative;
   z-index: 1;
   background: #FFFFFF;
@@ -48,7 +47,7 @@ html:before {
   font-size: 12px;
 }
 
-.form input {
+.form2 input {
   font-family: "Roboto", sans-serif;
   outline: 0;
   background: #f2f2f2;
@@ -80,3 +79,4 @@ button, input[type=submit] {
 .button:hover,.button:active,.button:focus {
   background: #43A047;
 }
+

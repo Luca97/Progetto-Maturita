@@ -21,7 +21,7 @@ if(isset($_SESSION["username"]))
 	<form class="form" action="chkLogin.php" method="POST">
 			<input type="text" name="username" id="username" placeholder="username"/><br/></br>
 			<input type="password" name="password" id="password" placeholder="password"/><br/><br/>
-			<input id="login" type="submit" value="Login" onclick="return chkLogin()">
+			<input id="login" type="submit" value="Login" onclick="return chkLogin();">
 			<br/>Non sei ancora iscritto? <a href="verifica.php">Registrati!</a>
 			<br/>Hai dimenticato la password? <a href="dimenticoPassword.php">Recuperala!</a>
 	</form>

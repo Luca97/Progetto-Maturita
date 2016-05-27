@@ -8,13 +8,13 @@
 	$username=$_SESSION["username"];
 	$db= new dbClass;
 	
-	$query="SELECT Username,Email FROM Users WHERE Username='".$username."' ORDER BY Username";
+	$query="SELECT Username,Email,Nome,Cognome FROM Users WHERE Username='".$username."' ORDER BY Username";
 	$ar=array();
 	$ar=$db->interroga($query);
 	$db->closeConnection();
 	$ar=$ar[0];
 	$ar=explode(";",$ar);
-	$vInfo=array("Username","Email");
+	$vInfo=array("Username","Email","Nome","Cognome");
 ?>
 
 <body>
@@ -35,7 +35,7 @@
 				if(isset($_GET["log"]))
 					echo "<h2>Benvenuto $username!</h2>";
 				$el= new elementClass;
-				$el->table($vInfo,$ar);
+				$el->table($vInfo,$ar);//Modificare il metodo per stampare anche nome e cognome
 			?>
 			
 		</form>

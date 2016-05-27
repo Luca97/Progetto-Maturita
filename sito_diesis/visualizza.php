@@ -20,7 +20,7 @@
     <!-- Page Content -->
     <?php 
 		$_POST["h1"]="Miei XML"; $_POST["h2"]="Genere"; 
-		$_POST["h3"]="Nome";include "layout/datagrid.php";
+		$_POST["h3"]="Titolo";include "layout/datagrid.php";
 	?>
 
 </body>

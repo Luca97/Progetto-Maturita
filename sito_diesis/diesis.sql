@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mag 20, 2016 alle 08:45
+-- Generation Time: Mag 27, 2016 alle 22:20
 -- Versione del server: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -59,6 +59,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `Username` char(20) NOT NULL,
   `Password` char(32) NOT NULL,
   `Email` varchar(30) NOT NULL,
+  `Nome` varchar(50) NOT NULL,
+  `Cognome` varchar(50) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Tabella che contiene gli Users del programma Diesis#';
 
@@ -66,13 +68,17 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Dump dei dati per la tabella `users`
 --
 
-INSERT INTO `users` (`Username`, `Password`, `Email`) VALUES
-('larry', '698d51a19d8a121ce581499d7b701668', 'larry@gmail,com'),
-('larry2', '698d51a19d8a121ce581499d7b701668', 'larry2@gmail.com'),
-('larry3', '698d51a19d8a121ce581499d7b701668', 'larry3@gmail.com'),
-('moribello', '698d51a19d8a121ce581499d7b701668', 'moribello@gmail.com'),
-('whmori', '698d51a19d8a121ce581499d7b701668', 'gabrielemori@outlook.com'),
-('whmori2', '698d51a19d8a121ce581499d7b701668', 'whmori2@gmail.com');
+INSERT INTO `users` (`Username`, `Password`, `Email`, `Nome`, `Cognome`) VALUES
+('ioio', '698d51a19d8a121ce581499d7b701668', 'pellizzer.luca@hotmail.com', 'Luca', 'Pellizzer'),
+('larry', '698d51a19d8a121ce581499d7b701668', 'larry@gmail.com', 'Vittorio', 'Larovere'),
+('larry2', '698d51a19d8a121ce581499d7b701668', 'larry2@gmail.com', 'Vittorio', 'Larovere'),
+('larry3', '698d51a19d8a121ce581499d7b701668', 'larry3@gmail.com', 'Vittorio', 'Larovere'),
+('moribello', '698d51a19d8a121ce581499d7b701668', 'moribello@gmail.com', 'GabrieleBello', 'MoriscoBello'),
+('nmn', '698d51a19d8a121ce581499d7b701668', 'nmm@km.it', '', ''),
+('sf90', '698d51a19d8a121ce581499d7b701668', 'sfatto@live.it', 'Sfatto', 'Danavita'),
+('troppoBello', '698d51a19d8a121ce581499d7b701668', 'troppoBello@gmail.com', 'GabrieleBello', 'MoriscoBello'),
+('whmori', '698d51a19d8a121ce581499d7b701668', 'gabrielemori@outlook.com', 'Gabriele', 'Morisco'),
+('whmori2', '698d51a19d8a121ce581499d7b701668', 'whmori2@gmail.com', 'Gabriele', 'Morisco');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

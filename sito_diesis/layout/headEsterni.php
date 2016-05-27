@@ -10,8 +10,7 @@
 	<script type="text/javascript" src="<?php echo $_POST["src"];?>"></script>
 	
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/styleIndex.css" rel="stylesheet">
+    <link href="css/bootstrap.min2.css" rel="stylesheet">
 	
 	<title><?php echo $_POST["titolo"];?></title>    
 	<!-- Custom CSS -->

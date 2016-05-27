@@ -138,14 +138,14 @@ class dbClass {
 	
 	}
 	
-	function chkRegistra($username,$psw,$email)
+	function chkRegistra($username,$psw,$email,$nome,$cognome)
 	{
 		if ($this->con->connect_error) {
 			die("Connection failed: " . $this->con->connect_error);
 		} 
 
-		$sql = "INSERT INTO users (Username, Password, Email)
-		VALUES ( '$username', '$psw', '$email' )";
+		$sql = "INSERT INTO users (Username, Password, Email, Nome, Cognome)
+		VALUES ( '$username', '$psw', '$email','$nome','$cognome' )";
 
 		if ($this->con->query($sql) === TRUE) {
 			echo header("location: login.php"); 

@@ -9,7 +9,7 @@ include "layout/head.php";
 	$db->checkSession();
 	
 	
-	$queryUt="SELECT Username, Email FROM users WHERE Username='$utente'";
+	$queryUt="SELECT Username, Email,Nome,Cognome FROM users WHERE Username='$utente'";
 	$arUt=array();
 	$arUt=$db->interroga($queryUt);
 	//$db->closeConnection();
@@ -22,7 +22,7 @@ include "layout/head.php";
 	$ar=array();
 	$ar=$db->interroga($query);
 	$db->closeConnection();
-	$vInfo=array("Username","Email");
+	$vInfo=array("Username","Email","Nome","Cognome");
 	?>
 <body>
 

@@ -4,7 +4,9 @@
 	
 	$db= new dbClass;
 	$db->checkSession();
+	
 	$query=$db->dataGrid();
+	$query=str_replace("Link","Link,Username",$query);
 	
 	$ar=array();
 	$ar=$db->interroga($query);
@@ -17,7 +19,7 @@
     <!-- Page Content -->
     <?php 
 		$_POST["h1"]="Biblioteca XML"; $_POST["h2"]="Genere"; 
-		$_POST["h3"]="Nome"; include "layout/datagrid.php";
+		$_POST["h3"]="Titolo"; include "layout/datagrid.php";
 	?>
 
 </body>
