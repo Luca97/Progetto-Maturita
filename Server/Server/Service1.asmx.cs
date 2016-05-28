@@ -135,7 +135,7 @@ namespace Server
 
 
         [WebMethod]
-        public string Registrazione(string key, string eml, string usn, string psw)
+        public string Registrazione(string key, string eml, string usn, string psw, string nome, string cognome)
         {
 
             if (key.Equals("Unaacaso1997-"))
@@ -149,7 +149,6 @@ namespace Server
                     MySqlConnection conn = new MySqlConnection(connStr);
                     conn.Open();
 
-                    // string sql = "INSERT INTO `contatti` (`ID`, `Nome`, `email`, `Tel`) VALUES (NULL, 'xxx', 'xxx', 'xxx');";
                     string sql = "SELECT * FROM `users` WHERE username='" + usn + "'";
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
                     rdr = cmd.ExecuteReader();
@@ -178,7 +177,7 @@ namespace Server
                         try
                         {
                             string nuovaPassword = MD5GenerateHash(psw);
-                            sql = "  INSERT INTO users (Username, Password, Email) VALUES ('" + usn + "', '" + nuovaPassword + "', '" + eml + "')  ";
+                            sql = "  INSERT INTO users (Username, Password, Email, Nome, Cognome) VALUES ('" + usn + "', '" + nuovaPassword + "', '" + eml + "', '" +nome+ "', '" +cognome+ "')  ";
                             cmd = new MySqlCommand(sql, conn);
                             cmd.ExecuteNonQuery();
                         }
