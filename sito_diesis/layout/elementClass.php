@@ -4,7 +4,7 @@ class elementClass {
 
 	function tableElencoUT($vInfo,$vDati)//Elenco utenti
 	{
-		echo "<div class='datagrid'>
+		echo "<div class='datagrid' style='overflow-x:auto;'>
 				<table border='1' style='width:100%'>			
 				<thead>
 					<tr><!-- riga -->";
@@ -40,7 +40,7 @@ class elementClass {
 	
 	function table($vInfo,$vDati)//Credenziali
 	{
-		echo "<div class='datagrid'>
+		echo "<div class='datagrid' style='overflow-x:auto;'>
 				<table border='1' style='width:100%'>			
 				<thead>
 					<tr><!-- riga -->";
@@ -63,7 +63,7 @@ class elementClass {
 	
 	function printDatagrid($vInfo,$ar)//5 colonne
 	{
-		echo "<div class='datagrid'>
+		echo "<div class='datagrid' style='overflow-x:auto;'>
 					<table border='1' style='width:100%'>			
 					<thead>
 						<tr><!-- riga -->";
