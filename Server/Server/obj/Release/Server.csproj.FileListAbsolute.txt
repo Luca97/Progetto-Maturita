@@ -1,0 +1,5 @@
+C:\Users\Luca\Desktop\Progetto\Server\Server\bin\Server.dll
+C:\Users\Luca\Desktop\Progetto\Server\Server\bin\Server.pdb
+C:\Users\Luca\Desktop\Progetto\Server\Server\obj\Release\Server.csprojResolveAssemblyReference.cache
+C:\Users\Luca\Desktop\Progetto\Server\Server\obj\Release\Server.dll
+C:\Users\Luca\Desktop\Progetto\Server\Server\obj\Release\Server.pdb

@@ -12,6 +12,7 @@ using System.Net;
 using System.Security.Cryptography;
 
 
+
 namespace Server
 {
     /// <summary>
@@ -187,7 +188,7 @@ namespace Server
                         }
 
 
-                        SendEmail(eml, "iscrizione a diesis#", "Grazie per esserti iscritto;\n Il tuo username è: " + usn + "\n La tua password è: " + psw + " (criptata)\n ");
+                        SendEmail(eml, "iscrizione a diesis#", nome + " Benvuto a Diesis# e grazie per esserti iscritto; Il tuo username è: " + usn + " La tua password è: " + psw );
 
                     }
 
@@ -323,7 +324,7 @@ namespace Server
             message.Subject = " " + obj + " ";
             //Set IsBodyHtml to true means you can send HTML email.
             message.IsBodyHtml = true;
-            message.Body = "<h1>" + text + " </h1>";
+            message.Body = "<a>" + text + " </a>";
             message.To.Add(eml);
             message.Priority = MailPriority.High;
             try
@@ -473,24 +474,6 @@ namespace Server
         }
 
 
-        [WebMethod]
-        public string InviaFile(string key, string address)
-        {
-
-            
-            if(key.Equals("Unaacaso1997-"))
-            {
-
-                return "ok";
-            }
-            else
-            {
-                return "nokey";
-            }
-
-        }
-
-
         public string GetEmail(string usn)
         {
 
@@ -523,6 +506,75 @@ namespace Server
             }
             return "nulla";
         }
+
+
+        [WebMethod]
+        public List<string> InviaFileAClient(string key, string path)
+        {
+            List<string> File = new List<string>();
+
+            if (key.Equals("Unaacaso1997-"))
+            {
+                try
+                {
+                    File.Clear();
+                    int counter = 0;
+                    string line;
+
+                    // Read the file and display it line by line.
+                    System.IO.StreamReader file = new System.IO.StreamReader(path);
+                    while ((line = file.ReadLine()) != null)
+                    {
+                        File.Add(line);
+                        counter++;
+                    }
+
+                    file.Close();
+                    return File;
+                }
+                catch (Exception e)
+                {
+                    File.Clear();
+                    File.Add(e.ToString());
+                    return File;
+
+                }
+            }
+            else
+            {
+                File.Clear();
+                File.Add("nokey");
+                return File;
+            }
+            
+        }
+
+
+        [WebMethod]
+        public string OttieniFileDaClient(string key, List<string> file, string nomefile)
+        {
+            List<string> File = new List<string>();
+
+            if (key.Equals("Unaacaso1997-"))
+            {
+                try
+                {
+                    System.IO.File.WriteAllLines(@"C:\inetpub\"+nomefile, file);
+                    return "ok";
+                }
+                catch (Exception e)
+                {
+                    return e.ToString();
+                }
+            }
+            else
+            {
+                return "nokey";
+            }   
+        }
+
+
+
        
     }
 }
