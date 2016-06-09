@@ -574,6 +574,45 @@ namespace Server
         }
 
 
+        [WebMethod]
+        public string VerificaTag(string key, string nome)
+        {
+            if (key.Equals("Unaacaso1997-"))
+            {
+                string connStr = "server=localhost;user=root;database=diesis;port=3306;password=;";
+                MySqlDataReader rdr = null; 
+
+                try 
+                {
+                    MySqlConnection conn = new MySqlConnection(connStr);
+                    conn.Open();
+
+                    string sql = "SELECT * FROM `files` WHERE Titolo='" + nome + "'";
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    rdr = cmd.ExecuteReader();
+                    while (rdr.Read())
+                    {
+                        if (rdr.GetString(4).Equals(nome))
+                        {
+                            return "occupato";
+                        }
+
+                    }
+                    conn.Close();
+                }
+                catch (Exception ex)
+                {
+                    return ex.ToString();
+                }
+            }
+            else
+            {
+                return "nokey";
+            }
+
+            return "ok";
+        }
 
        
     }
